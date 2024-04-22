@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:new_project/core/utils/colors_data.dart';
 
-class customTextField extends StatelessWidget {
-  customTextField({
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
     super.key,
     required this.label,
     required this.hint,
@@ -14,10 +14,10 @@ class customTextField extends StatelessWidget {
   final String label;
   final String hint;
   final Icon icon;
-  bool? obscureText;
-  Function(String)? onChanged;
+  final bool? obscureText;
+  final Function(String)? onChanged;
 
-  IconButton? secoundIcon;
+  final IconButton? secoundIcon;
 
   @override
   Widget build(BuildContext context) {

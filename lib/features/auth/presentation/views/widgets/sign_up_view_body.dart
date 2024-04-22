@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_project/core/utils/app_routes.dart';
@@ -8,8 +6,8 @@ import 'package:new_project/core/utils/assets_data.dart';
 import 'package:new_project/features/auth/presentation/views/widgets/custom_button.dart';
 import 'package:new_project/features/auth/presentation/views/widgets/custom_text_feild.dart';
 
-class SignInViewBody extends StatelessWidget {
-  const SignInViewBody({super.key});
+class SignUpViewBody extends StatelessWidget {
+  const SignUpViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,7 @@ class SignInViewBody extends StatelessWidget {
             height: 20,
           ),
           const Text(
-            'Welcome Back ',
+            'Welcome',
             style: TextStyle(
               fontStyle: FontStyle.italic,
               fontSize: 24,
@@ -30,6 +28,17 @@ class SignInViewBody extends StatelessWidget {
           ),
           const SizedBox(
             height: 20,
+          ),
+          const CustomTextField(
+            label: 'Name',
+            hint: 'write your name',
+            icon: Icon(
+              FontAwesomeIcons.user,
+              size: 16,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
           ),
           const CustomTextField(
             label: 'Email',
@@ -50,8 +59,19 @@ class SignInViewBody extends StatelessWidget {
               size: 16,
             ),
           ),
+          const SizedBox(
+            height: 10,
+          ),
+          const CustomTextField(
+            label: 'confirm password',
+            hint: 'confirm your password',
+            icon: Icon(
+              FontAwesomeIcons.eye,
+              size: 16,
+            ),
+          ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: MediaQuery.of(context).size.height * 0.04,
           ),
           CustomButton(
             title: 'LOG IN',
@@ -63,14 +83,11 @@ class SignInViewBody extends StatelessWidget {
           Center(
             child: GestureDetector(
               onTap: () {
-                GoRouter.of(context).push(AppRoutes.kSignUpView);
+                GoRouter.of(context).push(AppRoutes.kSignInView);
               },
-              child: const Text('Dont have account , create one!'),
+              child: const Text('Already have account , Log in!'),
             ),
           ),
-          // const Spacer(
-          //   flex: 1,
-          // ),
         ],
       ),
     );
