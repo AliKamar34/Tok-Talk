@@ -74,7 +74,7 @@ class SignUpViewBody extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.04,
           ),
           CustomButton(
-            title: 'LOG IN',
+            title: 'Sign Up',
             onPressed: () {},
           ),
           const SizedBox(

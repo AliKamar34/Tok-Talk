@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "586558187807",
+    "project_id": "tok-talk",
+    "storage_bucket": "tok-talk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586558187807:android:81e34d482d3fd90899682a",
+        "android_client_info": {
+          "package_name": "com.example.new_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARuHNGatn9gftMTNC3gfBCVPvfvymMkpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
