@@ -75,7 +75,9 @@ class SignUpViewBody extends StatelessWidget {
           ),
           CustomButton(
             title: 'Sign Up',
-            onPressed: () {},
+            onPressed: () {
+              GoRouter.of(context).push(AppRoutes.kHomeView);
+            },
           ),
           const SizedBox(
             height: 10,
