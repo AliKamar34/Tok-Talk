@@ -24,11 +24,11 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       // focusNode: NextFocusNode,
       obscureText: obscureText!,
-      // validator: (data) {
-      //   if (data!.isEmpty) {
-      //     return 'feild is required';
-      //   }
-      // },
+      validator: (data) {
+        if (data!.isEmpty) {
+          return 'feild is required';
+        } 
+      },
 
       onChanged: onChanged,
 

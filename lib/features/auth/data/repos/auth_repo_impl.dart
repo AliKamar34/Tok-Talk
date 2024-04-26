@@ -38,7 +38,7 @@ class AuthRepoImpl extends AuthRepo {
       CollectionReference users = FirebaseFirestore.instance
           .collection(UserCollectionData.userCollectionName);
       DocumentReference userDoc = users.doc(email);
-      // if (name != null && email != null) {
+    
       await userDoc.set(
         {
           UserCollectionData.userName: name,
@@ -55,10 +55,11 @@ class AuthRepoImpl extends AuthRepo {
         // showSnackBar(context, 'Weak password');
       } else if (e.code == 'email-already-in-use') {
         log('email already in use');
+        
         // showSnackBar(context, 'Email already in use');
       }
     } catch (e) {
-      log('there was an error');
+      log(e.toString());
       // showSnackBar(context, 'There was an error');
     }
   }
