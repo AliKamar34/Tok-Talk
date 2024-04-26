@@ -5,6 +5,7 @@ import 'package:new_project/core/utils/colors_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:new_project/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:new_project/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
+import 'package:new_project/simple_bloc_observer.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -12,7 +13,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const ChatGramApp());
+
+  BlocOverrides.runZoned(
+    () {
+      runApp(const ChatGramApp());
+    },
+    blocObserver: SimpleBlocObserver(),
+  );
+  
 }
 
 class ChatGramApp extends StatelessWidget {

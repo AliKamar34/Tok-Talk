@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:new_project/core/errors/failuer_error.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
 import 'package:new_project/features/auth/data/repos/auth_repo.dart';
 
@@ -38,7 +39,7 @@ class AuthRepoImpl extends AuthRepo {
       CollectionReference users = FirebaseFirestore.instance
           .collection(UserCollectionData.userCollectionName);
       DocumentReference userDoc = users.doc(email);
-    
+
       await userDoc.set(
         {
           UserCollectionData.userName: name,
@@ -52,14 +53,13 @@ class AuthRepoImpl extends AuthRepo {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         log('weak password');
-        // showSnackBar(context, 'Weak password');
+        FirebaseExceptionFailure('weaaaak passworddddd');
       } else if (e.code == 'email-already-in-use') {
-        log('email already in use');
-        
-        // showSnackBar(context, 'Email already in use');
+        // log('email already in use');
+        FirebaseExceptionFailure('email already in use');
+        // log('erorre frooomom auth repo');
       }
     } catch (e) {
-      log(e.toString());
       // showSnackBar(context, 'There was an error');
     }
   }
