@@ -4,23 +4,26 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_project/core/utils/app_routes.dart';
 import 'package:new_project/core/utils/assets_data.dart';
+import 'package:new_project/core/widgets/custom_loading_indicator.dart';
 import 'package:new_project/core/widgets/custom_snack_bar.dart';
 import 'package:new_project/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
 import 'package:new_project/features/auth/presentation/views/widgets/custom_button.dart';
 import 'package:new_project/features/auth/presentation/views/widgets/custom_text_feild.dart';
 
 class SignUpViewBody extends StatelessWidget {
-  SignUpViewBody({super.key});
-  final GlobalKey<FormState> formKey = GlobalKey();
-  bool isLoading = false;
+  const SignUpViewBody({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> formKey = GlobalKey();
+    bool isLoading = false;
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is RegisterLoading) {
           isLoading = true;
         } else if (state is RegisterSuccess) {
           isLoading = false;
+          showSnackBar(context, 'testining');
           GoRouter.of(context).push(AppRoutes.kHomeView);
         } else if (state is RegisterFailuer) {
           isLoading = false;
@@ -111,7 +114,7 @@ class SignUpViewBody extends StatelessWidget {
                 ),
                 CustomButton(
                   widget: isLoading
-                      ? const CircularProgressIndicator()
+                      ? const CustomLoadingIndicator()
                       : const Text('Sign Up'),
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {

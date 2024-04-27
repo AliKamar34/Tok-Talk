@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_project/core/utils/app_routes.dart';
 import 'package:new_project/core/utils/assets_data.dart';
+import 'package:new_project/core/widgets/custom_snack_bar.dart';
 import 'package:new_project/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
 import 'package:new_project/features/auth/presentation/views/widgets/custom_button.dart';
 import 'package:new_project/features/auth/presentation/views/widgets/custom_text_feild.dart';
@@ -13,9 +14,22 @@ import 'package:new_project/features/auth/presentation/views/widgets/custom_text
 class SignInViewBody extends StatelessWidget {
   SignInViewBody({super.key});
   final GlobalKey<FormState> formKey = GlobalKey();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is LogInLoading) {
+          isLoading = true;
+        } else if (state is LogInSuccess) {
+          isLoading = false;
+          showSnackBar(context, 'fjhfgd');
+          // GoRouter.of(context).push(AppRoutes.kHomeView);
+        } else if (state is LogInFailuer) {
+          isLoading = false;
+          showSnackBar(context, 'error message form lob in page');
+        }
+      },
       builder: (context, state) {
         String? email;
         String? password;
@@ -70,15 +84,12 @@ class SignInViewBody extends StatelessWidget {
                 ),
                 CustomButton(
                   widget: const Text('LOG IN'),
-                  onPressed: ()  async{
+                  onPressed: () async {
                     if (formKey.currentState!.validate()) {
                       BlocProvider.of<AuthBloc>(context).add(
                         LogInEvent(email: email!, password: password!),
                       );
-
-                      GoRouter.of(context).push(AppRoutes.kHomeView);
                     }
-
                   },
                 ),
                 const SizedBox(
@@ -92,9 +103,6 @@ class SignInViewBody extends StatelessWidget {
                     child: const Text('Dont have account , create one!'),
                   ),
                 ),
-                // const Spacer(
-                //   flex: 1,
-                // ),
               ],
             ),
           ),
