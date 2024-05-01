@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class Failure {
@@ -19,17 +21,17 @@ class FirebaseExceptionFailure extends Failure {
       return FirebaseExceptionFailure('No user found for that email');
     } else if (firebaseException.code == 'wrong-password') {
       return FirebaseExceptionFailure('Wrong password');
+    } else if (firebaseException.code == 'invalid-credential') {
+      return FirebaseExceptionFailure('invalid password');
+    } else if (firebaseException.code == 'invalid-email') {
+      return FirebaseExceptionFailure('invalid email');
     } else if (firebaseException.code == 'INVALID_LOGIN_CREDENTIALS') {
       return FirebaseExceptionFailure('email or password is wrong');
     } else if (firebaseException.code == 'too-many-requests') {
       return FirebaseExceptionFailure(
           'too many requests , please try again later');
     }
-
-    return FirebaseExceptionFailure('Unexpected error');
+    log(firebaseException.code);
+    return FirebaseExceptionFailure(firebaseException.code);
   }
 }
-
-
-
-

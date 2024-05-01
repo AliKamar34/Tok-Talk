@@ -6,28 +6,30 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_project/core/utils/app_routes.dart';
 import 'package:new_project/core/utils/assets_data.dart';
+import 'package:new_project/core/widgets/custom_loading_indicator.dart';
 import 'package:new_project/core/widgets/custom_snack_bar.dart';
 import 'package:new_project/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
 import 'package:new_project/features/auth/presentation/views/widgets/custom_button.dart';
 import 'package:new_project/features/auth/presentation/views/widgets/custom_text_feild.dart';
 
 class SignInViewBody extends StatelessWidget {
-  SignInViewBody({super.key});
-  final GlobalKey<FormState> formKey = GlobalKey();
-  bool isLoading = false;
+  const SignInViewBody({super.key});
+
   @override
   Widget build(BuildContext context) {
+      final GlobalKey<FormState> formKey = GlobalKey();
+  bool isLoading = false;
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LogInLoading) {
           isLoading = true;
         } else if (state is LogInSuccess) {
           isLoading = false;
-          showSnackBar(context, 'fjhfgd');
-          // GoRouter.of(context).push(AppRoutes.kHomeView);
+         
+          GoRouter.of(context).push(AppRoutes.kHomeView);
         } else if (state is LogInFailuer) {
-          isLoading = false;
-          showSnackBar(context, 'error message form lob in page');
+         isLoading = false;
+          showSnackBar(context, state.errMessage);
         }
       },
       builder: (context, state) {
@@ -83,7 +85,9 @@ class SignInViewBody extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.2,
                 ),
                 CustomButton(
-                  widget: const Text('LOG IN'),
+                  widget: isLoading
+                      ? const CustomLoadingIndicator()
+                      : const Text('LOG IN'),
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
                       BlocProvider.of<AuthBloc>(context).add(
