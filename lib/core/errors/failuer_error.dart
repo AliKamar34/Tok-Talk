@@ -1,22 +1,4 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-
-// abstract class Failuer {
-//   final String errorMessage;
-
-//   const Failuer(this.errorMessage);
-// }
-
-// class FirebaseExption extends Failuer {
-//   FirebaseExption(super.errorMessage);
-
-//   factory FirebaseExption.formFirebaseExption(
-//       FirebaseException firebaseException) {
-//     return FirebaseException.message ?? 'there is an error in fire base failuer';
-//   }
-// }
-
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 abstract class Failure {
   final String errorMessage;
@@ -24,37 +6,30 @@ abstract class Failure {
   const Failure(this.errorMessage);
 }
 
-
 class FirebaseExceptionFailure extends Failure {
   FirebaseExceptionFailure(super.errorMessage);
 
-
   factory FirebaseExceptionFailure.fromFirebaseException(
       FirebaseException firebaseException) {
-    
-    String errorMessage = firebaseException.message ?? 'An error occurred';
-    return FirebaseExceptionFailure(errorMessage);
+    if (firebaseException.code == 'email-already-in-use') {
+      return FirebaseExceptionFailure('email already in use');
+    } else if (firebaseException.code == 'weak-password') {
+      return FirebaseExceptionFailure('weak password');
+    } else if (firebaseException.code == 'user-not-found') {
+      return FirebaseExceptionFailure('No user found for that email');
+    } else if (firebaseException.code == 'wrong-password') {
+      return FirebaseExceptionFailure('Wrong password');
+    } else if (firebaseException.code == 'INVALID_LOGIN_CREDENTIALS') {
+      return FirebaseExceptionFailure('email or password is wrong');
+    } else if (firebaseException.code == 'too-many-requests') {
+      return FirebaseExceptionFailure(
+          'too many requests , please try again later');
+    }
+
+    return FirebaseExceptionFailure('Unexpected error');
   }
 }
 
 
 
 
-// on FirebaseAuthException catch (e) {
-        //     if (e.code == 'user-not-found') {
-        //       emit(LogInFailuer(errMessage: 'No user found for that email'));
-        //     } else if (e.code == 'wrong-password') {
-        //       emit(LogInFailuer(errMessage: 'Wrong password'));
-        //     } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
-        //       emit(LogInFailuer(errMessage: 'email or password is wrong'));
-        //     } else if (e.code == 'too-many-requests') {
-        //       emit(LogInFailuer(
-        //           errMessage: 'too many requests , please try again later'));
-        //     }
-        //   }
-        //  on FirebaseAuthException catch (e) {
-        //     if (e.code == 'weak-password') {
-        //       emit(RegisterFailuer(errMessage: 'Weak password'));
-        //     } else if (e.code == 'email-already-in-use') {
-        //       emit(RegisterFailuer(errMessage: 'Email already in use'));
-        //     }
