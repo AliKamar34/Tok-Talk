@@ -13,14 +13,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Bloc.observer = SimpleBlocObserver();
 
-  BlocOverrides.runZoned(
-    () {
-      runApp(const ChatGramApp());
-    },
-    blocObserver: SimpleBlocObserver(),
-  );
-  
+  runApp(const ChatGramApp());
 }
 
 class ChatGramApp extends StatelessWidget {
