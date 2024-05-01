@@ -1,9 +1,11 @@
 // ignore_for_file: unused_local_variable
 
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+
 import 'package:new_project/core/errors/failuer_error.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
 import 'package:new_project/features/auth/data/repos/auth_repo.dart';
@@ -18,12 +20,14 @@ class AuthRepoImpl extends AuthRepo {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      // return  Right();
+      return const Right(null);
     } catch (e) {
-      return Left(FirebaseExceptionFailure(e.toString()));
+      if (e is FirebaseAuthException) {
+        return Left(FirebaseExceptionFailure.fromFirebaseException(e));
+      } else {
+        return Left(FirebaseExceptionFailure(e.toString()));
+      }
     }
-
-    throw UnimplementedError();
   }
 
   @override
@@ -57,22 +61,13 @@ class AuthRepoImpl extends AuthRepo {
         },
         SetOptions(merge: true),
       );
+      return const Right(null);
     } catch (e) {
       if (e is FirebaseAuthException) {
         return Left(FirebaseExceptionFailure.fromFirebaseException(e));
       } else {
-        return left(FirebaseExceptionFailure(e.toString()));
+        return Left(FirebaseExceptionFailure(e.toString()));
       }
     }
-    // } on FirebaseAuthException catch (e) {
-    //   if (e.code == 'weak-password') {
-    //     return Left(FirebaseExceptionFailure.fromFirebaseException(e));
-    //   } else if (e.code == 'email-already-in-use') {
-    //     return Left(FirebaseExceptionFailure(e.code));
-    //   }
-    // } catch (e) {
-    //   return Left(FirebaseExceptionFailure(e.toString()));
-    // }
-    throw UnimplementedError();
   }
 }
