@@ -15,6 +15,7 @@ class UserModel {
     return UserModel(
       name: jsondata[UserCollectionData.userName],
       email: jsondata[UserCollectionData.userEmail],
+      image: jsondata[UserCollectionData.userImage],
     );
   }
 }

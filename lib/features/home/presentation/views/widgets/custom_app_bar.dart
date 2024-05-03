@@ -8,11 +8,14 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SizedBox(
-     height: 70,
-     width: double.infinity,
-     child: Center(
-       child: Text('Chats '),
-     ),
-              );
+      height: 65,
+      width: double.infinity,
+      child: Center(
+        child: Text(
+          'Chats',
+          style: TextStyle(fontSize: 26),
+        ),
+      ),
+    );
   }
 }

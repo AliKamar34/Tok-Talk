@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_project/core/utils/colors_data.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
+import 'package:new_project/features/home/presentation/views/widgets/message_counter.dart';
 
 class CustomChatInfoButton extends StatelessWidget {
   const CustomChatInfoButton({super.key, required this.onPressed});
@@ -21,16 +22,30 @@ class CustomChatInfoButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
         ),
-        child: const ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: CustomCircleImage(),
-          title: Text('ali kamar'),
-          subtitle: Text('hello'),
+        child: const Row(
+          children: [
+            Expanded(
+              child: ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: CustomCircleImage(),
+                title: Text(
+                  'ali kamar',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text('hello'),
+              ),
+            ),
+            Column(
+              children: [
+                Text('today'),
+                MessageCounter(),
+              ],
+            )
+          ],
         ),
       ),
     );
   }
 }
-
