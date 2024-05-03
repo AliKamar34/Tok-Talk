@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -65,7 +66,11 @@ class _SplashViewBodyState extends State<SplashViewBody>
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        GoRouter.of(context).push(AppRoutes.kSignInView);
+        if (FirebaseAuth.instance.currentUser != null) {
+          GoRouter.of(context).push(AppRoutes.kBottomNavigationBarView);
+        } else {
+          GoRouter.of(context).push(AppRoutes.kSignInView);
+        }
       },
     );
   }

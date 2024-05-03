@@ -27,7 +27,8 @@ class CustomTextField extends StatelessWidget {
       validator: (data) {
         if (data!.isEmpty) {
           return 'feild is required';
-        } 
+        }
+        return null;
       },
 
       onChanged: onChanged,

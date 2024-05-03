@@ -21,11 +21,10 @@ class SignUpViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is RegisterLoading) {
           isLoading = true;
-          
         } else if (state is RegisterSuccess) {
           isLoading = false;
-         
-          GoRouter.of(context).push(AppRoutes.kHomeView);
+
+          GoRouter.of(context).push(AppRoutes.kBottomNavigationBarView);
         } else if (state is RegisterFailuer) {
           isLoading = false;
           showSnackBar(context, state.errMessage);

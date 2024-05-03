@@ -19,7 +19,7 @@ class AuthRepoImpl extends AuthRepo {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-
+ 
       return const Right(null);
     } catch (e) {
       if (e is FirebaseAuthException) {
@@ -42,6 +42,7 @@ class AuthRepoImpl extends AuthRepo {
         email: email,
         password: password,
       );
+       
 
       User? user = userCredential.user;
       if (user != null) {

@@ -17,18 +17,19 @@ class SignInViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      final GlobalKey<FormState> formKey = GlobalKey();
-  bool isLoading = false;
+    final GlobalKey<FormState> formKey = GlobalKey();
+    bool isLoading = false;
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LogInLoading) {
           isLoading = true;
         } else if (state is LogInSuccess) {
           isLoading = false;
-         
-          GoRouter.of(context).push(AppRoutes.kHomeView);
+
+          
+          GoRouter.of(context).push(AppRoutes.kBottomNavigationBarView);
         } else if (state is LogInFailuer) {
-         isLoading = false;
+          isLoading = false;
           showSnackBar(context, state.errMessage);
         }
       },
