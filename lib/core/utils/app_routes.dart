@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:new_project/features/auth/presentation/views/sign_in_view.dart';
 import 'package:new_project/features/auth/presentation/views/sign_up_view.dart';
-import 'package:new_project/features/home/presentation/views/animated_bottom_navigation_bar.dart';
 import 'package:new_project/features/home/presentation/views/home_view.dart';
+import 'package:new_project/features/home/presentation/views/chats_view.dart';
 import 'package:new_project/features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRoutes {
@@ -13,9 +12,6 @@ abstract class AppRoutes {
   static const kSignInView = '/signInView';
   static const kSignUpView = '/SignUpView';
   static const kBottomNavigationBarView = '/BottomNavigationBarView';
-
- 
-
 
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
@@ -25,13 +21,13 @@ abstract class AppRoutes {
           return const SplashView();
         },
       ),
-        GoRoute(
+      GoRoute(
         path: kSignInView,
         builder: (BuildContext context, GoRouterState state) {
           return const SignInView();
         },
       ),
-        GoRoute(
+      GoRoute(
         path: kSignUpView,
         builder: (BuildContext context, GoRouterState state) {
           return const SignUpView();
@@ -40,16 +36,15 @@ abstract class AppRoutes {
       GoRoute(
         path: kHomeView,
         builder: (BuildContext context, GoRouterState state) {
+          return const ChatsView();
+        },
+      ),
+      GoRoute(
+        path: kBottomNavigationBarView,
+        builder: (BuildContext context, GoRouterState state) {
           return const HomeView();
         },
       ),
-       GoRoute(
-        path: kBottomNavigationBarView,
-        builder: (BuildContext context, GoRouterState state) {
-          return const  BottomNavigationBarView();
-        },
-      ),
-   
     ],
   );
 }
