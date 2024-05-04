@@ -1,5 +1,5 @@
 class MessagesCollectionData {
-  static const messagesCollectionName = 'MessagesPerson';
+  static const messagesCollectionName = 'chats';
 
   static const messagesPersonEmail = 'email';
   static const messagesPersonName = 'name';
