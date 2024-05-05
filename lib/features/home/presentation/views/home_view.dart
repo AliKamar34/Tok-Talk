@@ -19,7 +19,6 @@ class HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    
     double displayWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomNavigationBar: Container(
@@ -147,8 +146,8 @@ class HomeViewState extends State<HomeView> {
   ];
   List<Widget> pages = [
     const ChatsView(),
-    const FriendsView(),
     const GroupsChatsView(),
+    const FriendsView(),
     const SettingsView(),
   ];
 }
