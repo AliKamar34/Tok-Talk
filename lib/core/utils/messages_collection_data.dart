@@ -5,4 +5,8 @@ class MessagesCollectionData {
   static const messagesPersonName = 'name';
   static const messagesPersonImage = 'ulrUserPhoto';
   static const messagePersonLastTime = 'lastMessageTime';
+  static const messsageGroupName = 'groupName';
+  static const messsageGroupImage = 'groupImageUrl';
+  static const messsageGroupmembers = 'groupMembers';
+
 }
