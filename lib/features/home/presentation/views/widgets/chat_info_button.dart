@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:new_project/core/utils/colors_data.dart';
+import 'package:new_project/features/home/data/models/person_model.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
 import 'package:new_project/features/home/presentation/views/widgets/message_counter.dart';
 
 class CustomChatInfoButton extends StatelessWidget {
-  const CustomChatInfoButton({super.key, required this.onPressed});
-
+  const CustomChatInfoButton({
+    super.key,
+    required this.onPressed,
+    required this.personModel,
+  });
+  final PersonModel personModel;
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
@@ -24,20 +29,22 @@ class CustomChatInfoButton extends StatelessWidget {
           ),
           padding: const EdgeInsets.symmetric(horizontal: 12),
         ),
-        child: const Row(
+        child: Row(
           children: [
             Expanded(
               child: ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: CustomCircleImage(),
-                title: Text(
-                  'ali kamar',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                leading: CustomCircleImage(
+                  imageUrl: personModel.image,
                 ),
-                subtitle: Text('hello'),
+                title: Text(
+                  personModel.name,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(personModel.email),
               ),
             ),
-            Column(
+            const Column(
               children: [
                 Text('today'),
                 MessageCounter(),

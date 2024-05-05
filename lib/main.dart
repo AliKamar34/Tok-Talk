@@ -5,6 +5,8 @@ import 'package:new_project/core/utils/colors_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:new_project/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:new_project/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
+import 'package:new_project/features/home/data/repos/home_repo_impl.dart';
+import 'package:new_project/features/home/presentation/manager/chats_cubit/chats_cubit.dart';
 import 'package:new_project/simple_bloc_observer.dart';
 import 'firebase_options.dart';
 
@@ -29,6 +31,11 @@ class ChatGramApp extends StatelessWidget {
           create: (context) => AuthBloc(
             AuthRepoImpl(),
           ),
+        ),
+        BlocProvider(
+          create: (context) => ChatsCubit(
+            HomeRepoImpl(),
+          )..getChats(),
         ),
       ],
       child: MaterialApp.router(

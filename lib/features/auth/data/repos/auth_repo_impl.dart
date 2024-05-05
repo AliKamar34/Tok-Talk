@@ -58,7 +58,7 @@ class AuthRepoImpl extends AuthRepo {
           UserCollectionData.userName: name,
           UserCollectionData.userEmail: email,
           UserCollectionData.userImage:
-              'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.flaticon.com%2Ffree-icon%2Fuser_3177440&psig=AOvVaw359pM1TAMJfLzyzqqysoQK&ust=1700596158590000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCODEysKs04IDFQAAAAAdAAAAABAE'
+              'https://en.m.wikipedia.org/wiki/File:Sample_User_Icon.png'
         },
         SetOptions(merge: true),
       );

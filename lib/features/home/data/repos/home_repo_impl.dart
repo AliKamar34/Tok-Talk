@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,11 +19,24 @@ class HomeRepoImpl extends HomeRepo {
 
     try {
       List<PersonModel> persons = [];
-      chats.orderBy(MessagesCollectionData.messagePersonLastTime, descending: true).snapshots().listen(
+      chats
+          .orderBy(
+            // UserCollectionData.userName,
+            MessagesCollectionData.messagePersonLastTime,
+            descending: true,
+          )
+          .snapshots()
+          .listen(
         (event) {
           for (var docs in event.docs) {
             persons.add(PersonModel.fromjson(docs));
           }
+          log('data form home repo');
+          log(persons.length.toString());
+          log(persons.toString());
+
+          log(event.docs.toString());
+          log(FirebaseAuth.instance.currentUser!.email.toString());
         },
       );
       return right(persons);

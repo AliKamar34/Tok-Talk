@@ -19,6 +19,7 @@ class HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    
     double displayWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomNavigationBar: Container(
