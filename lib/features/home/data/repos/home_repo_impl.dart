@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_project/core/errors/failuer_error.dart';
 import 'package:new_project/core/utils/messages_collection_data.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
+import 'package:new_project/features/home/data/models/group_model.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
 import 'package:new_project/features/home/data/repos/home_repo.dart';
 
@@ -15,7 +16,7 @@ class HomeRepoImpl extends HomeRepo {
     CollectionReference chats = FirebaseFirestore.instance
         .collection(UserCollectionData.userCollectionName)
         .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection(MessagesCollectionData.messagesCollectionName);
+        .collection(MessagesCollectionData.messagesChatCollectionName);
 
     try {
       List<PersonModel> persons = [];
@@ -40,6 +41,40 @@ class HomeRepoImpl extends HomeRepo {
         },
       );
       return right(persons);
+    } catch (e) {
+      return left(FirebaseExceptionFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<GroupModel>>> getGroups() async {
+     CollectionReference chats = FirebaseFirestore.instance
+        .collection(UserCollectionData.userCollectionName)
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection(MessagesCollectionData.messagesGroupCollectionName);
+
+    try {
+      List<GroupModel> groups = [];
+      chats
+          .orderBy(
+            MessagesCollectionData.messagePersonLastTime,
+            descending: true,
+          )
+          .snapshots()
+          .listen(
+        (event) {
+          for (var docs in event.docs) {
+            groups.add(GroupModel.formJson(docs));
+          }
+          log('data form home repo');
+          log(groups.length.toString());
+          log(groups.toString());
+
+          log(event.docs.toString());
+          log(FirebaseAuth.instance.currentUser!.email.toString());
+        },
+      );
+      return right(groups);
     } catch (e) {
       return left(FirebaseExceptionFailure(e.toString()));
     }
