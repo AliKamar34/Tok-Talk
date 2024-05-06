@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:new_project/features/home/presentation/views/widgets/firend_box_action.dart';
 
@@ -10,7 +9,7 @@ class CustomFriendsAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SizedBox(
-      height: 65,
+      height: 48,
       width: double.infinity,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15),
@@ -28,4 +27,3 @@ class CustomFriendsAppBar extends StatelessWidget {
     );
   }
 }
-
