@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:new_project/features/auth/data/repos/auth_repo.dart';
 
 part 'auth_event.dart';
