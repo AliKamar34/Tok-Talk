@@ -22,7 +22,7 @@ class HomeRepoImpl extends HomeRepo {
       List<PersonModel> persons = [];
       chats
           .orderBy(
-            // UserCollectionData.userName,
+            
             MessagesCollectionData.messagePersonLastTime,
             descending: true,
           )
@@ -75,6 +75,41 @@ class HomeRepoImpl extends HomeRepo {
         },
       );
       return right(groups);
+    } catch (e) {
+      return left(FirebaseExceptionFailure(e.toString()));
+    }
+  }
+  
+  @override
+  Future<Either<Failure, List<PersonModel>>> getFriends() async {
+    CollectionReference chats = FirebaseFirestore.instance
+        .collection(UserCollectionData.userCollectionName)
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection(MessagesCollectionData.messagesFriendsCollectionName);
+
+    try {
+      List<PersonModel> friends = [];
+      chats
+          .orderBy(
+            
+            MessagesCollectionData.messagesPersonName,
+            descending: true,
+          )
+          .snapshots()
+          .listen(
+        (event) {
+          for (var docs in event.docs) {
+            friends.add(PersonModel.fromjson(docs));
+          }
+          log('data form home repo');
+          log(friends.length.toString());
+          log(friends.toString());
+
+          log(event.docs.toString());
+          log(FirebaseAuth.instance.currentUser!.email.toString());
+        },
+      );
+      return right(friends);
     } catch (e) {
       return left(FirebaseExceptionFailure(e.toString()));
     }

@@ -5,6 +5,7 @@ import 'package:new_project/features/home/data/models/person_model.dart';
 
 abstract class HomeRepo {
   Future<Either<Failure, List<PersonModel>>> getChats();
-    Future<Either<Failure, List<GroupModel>>> getGroups();
+  Future<Either<Failure, List<GroupModel>>> getGroups();
+  Future<Either<Failure, List<PersonModel>>> getFriends();
 
 }
