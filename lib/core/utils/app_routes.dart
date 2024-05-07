@@ -5,12 +5,15 @@ import 'package:new_project/features/auth/presentation/views/sign_in_view.dart';
 import 'package:new_project/features/auth/presentation/views/sign_up_view.dart';
 import 'package:new_project/features/home/presentation/views/home_view.dart';
 import 'package:new_project/features/home/presentation/views/chats_view.dart';
+import 'package:new_project/features/search/presentation/views/search_view.dart';
 import 'package:new_project/features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRoutes {
   static const kHomeView = '/homeView';
   static const kSignInView = '/signInView';
   static const kSignUpView = '/SignUpView';
+  static const kSearchView = '/SearchView';
+
   static const kBottomNavigationBarView = '/BottomNavigationBarView';
 
   static final GoRouter router = GoRouter(
@@ -43,6 +46,12 @@ abstract class AppRoutes {
         path: kBottomNavigationBarView,
         builder: (BuildContext context, GoRouterState state) {
           return const HomeView();
+        },
+      ),
+       GoRoute(
+        path: kSearchView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const SearchView();
         },
       ),
     ],

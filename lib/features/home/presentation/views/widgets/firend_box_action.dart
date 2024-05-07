@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:new_project/core/utils/app_routes.dart';
 import 'package:new_project/core/utils/colors_data.dart';
 
 class FriendBoxAction extends StatelessWidget {
@@ -11,7 +13,9 @@ class FriendBoxAction extends StatelessWidget {
     return Row(
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            GoRouter.of(context).push(AppRoutes.kSearchView);
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shape: const RoundedRectangleBorder(
