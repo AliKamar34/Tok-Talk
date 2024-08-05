@@ -12,7 +12,7 @@ class CustomLoadingIndicator extends StatelessWidget {
     return const LoadingIndicator(
       indicatorType: Indicator.ballPulse,
       colors: [
-        ColorAssetData.kprimaryColor,
+        ColorAssetData.kSecondaryColor,
       ],
       strokeWidth: 0.23,
       pathBackgroundColor: Colors.black,
