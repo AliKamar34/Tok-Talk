@@ -5,15 +5,16 @@ import 'package:new_project/core/widgets/custom_elevated_button.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
 
-class CustomFriendInfoButton extends StatelessWidget {
-  const CustomFriendInfoButton(
+class CustomSearchInfoButton extends StatelessWidget {
+  const CustomSearchInfoButton(
       {super.key, required this.personModel, this.onPressed});
+
   final PersonModel personModel;
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return CustomBackgoundContainer(
-      onPressed: onPressed, // go to profile
+      onPressed: onPressed,
       child: ListTile(
           contentPadding: EdgeInsets.zero,
           leading: CustomCircleImage(
@@ -25,12 +26,10 @@ class CustomFriendInfoButton extends StatelessWidget {
           ),
           subtitle: Text(personModel.email),
           trailing: CustomElevateButton(
-            onPressed: () {
-              // go to chat 
-            },
+            onPressed: () {},
             buttonTitle: 'chat',
             buttonColor: ColorAssetData.kScaffoldColor,
-          )),
+          ),),
     );
   }
 }
