@@ -16,7 +16,7 @@ class SearchResultListView extends StatelessWidget {
             itemCount: state.searchResult.length,
             itemBuilder: (context, index) {
               return CustomFriendInfoButton(
-                personModel:state.searchResult[index],
+                personModel: state.searchResult[index],
                 onPressed: () {},
               );
             },
@@ -26,7 +26,7 @@ class SearchResultListView extends StatelessWidget {
             child: Text(state.errMessage),
           );
         } else if (state is SearchLoading) {
-          return const CustomLoadingIndicator();
+          return const Center(child: CustomLoadingIndicator());
         } else {
           return const Center(
             child: Text('Search'),
