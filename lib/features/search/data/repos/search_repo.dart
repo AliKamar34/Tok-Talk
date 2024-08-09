@@ -4,5 +4,6 @@ import 'package:new_project/features/home/data/models/person_model.dart';
 
 abstract class SearchRepo {
   Future<Either<Failure, List<PersonModel>>> searchForFriend({required String personName});
+  Future<Either<Failure,void>> addFriend({required String personEmail});
 }
 
