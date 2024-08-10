@@ -12,6 +12,7 @@ import 'package:new_project/features/home/presentation/views/chats_view.dart';
 import 'package:new_project/features/search/data/repos/search_repo_impl.dart';
 import 'package:new_project/features/search/presentation/manager/search_cubit/search_cubit.dart';
 import 'package:new_project/features/search/presentation/views/search_view.dart';
+import 'package:new_project/features/settings/presentation/views/profile_view.dart';
 import 'package:new_project/features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRoutes {
@@ -20,6 +21,7 @@ abstract class AppRoutes {
   static const kSignUpView = '/SignUpView';
   static const kSearchView = '/SearchView';
   static const kRequestsView = '/RequestsView';
+  static const kProfileView = '/profileView';
 
   static const kBottomNavigationBarView = '/BottomNavigationBarView';
 
@@ -71,6 +73,12 @@ abstract class AppRoutes {
             create: (context) => FriendsCubit(FriendsRepoImpl())..getRequests(),
             child: const RequestsView(),
           );
+        },
+      ),
+      GoRoute(
+        path: kProfileView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const ProfileView();
         },
       ),
     ],

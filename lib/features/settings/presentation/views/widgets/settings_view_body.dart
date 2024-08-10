@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:new_project/core/utils/app_routes.dart';
 import 'package:new_project/core/widgets/custom_backgtound_container.dart';
 
 class SettingsViewBody extends StatelessWidget {
@@ -13,7 +15,9 @@ class SettingsViewBody extends StatelessWidget {
           height: 24,
         ),
         CustomBackgoundContainer(
-          onPressed: () {},
+          onPressed: () {
+            GoRouter.of(context).push(AppRoutes.kProfileView);
+          },
           child: const Padding(
             padding: EdgeInsets.all(15),
             child: Row(
