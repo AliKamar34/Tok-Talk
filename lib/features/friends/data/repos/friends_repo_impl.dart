@@ -75,4 +75,34 @@ class FriendsRepoImpl extends FriendsRepo {
       return left(FirebaseExceptionFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<PersonModel>>> getRequests() async {
+    CollectionReference requests = FirebaseFirestore.instance
+        .collection(UserCollectionData.userCollectionName)
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection(FriendCollentionData.friendCollectionName)
+        .doc('${FirebaseAuth.instance.currentUser!.email} Friends')
+        .collection(FriendCollentionData.userFriendCollentionData);
+
+    try {
+      List<PersonModel> requestList = [];
+      requests
+          .orderBy(
+            MessagesCollectionData.messagesPersonName,
+            descending: true,
+          )
+          .snapshots()
+          .listen(
+        (event) {
+          for (var docs in event.docs) {
+            requestList.add(PersonModel.fromjson(docs));
+          }
+        },
+      );
+      return right(requestList);
+    } catch (e) {
+      return left(FirebaseExceptionFailure(e.toString()));
+    }
+  }
 }

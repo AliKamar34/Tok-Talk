@@ -18,4 +18,14 @@ class FriendsCubit extends Cubit<FriendsState> {
       emit(FriendsSuccess(friends: friends));
     });
   }
+
+  Future<void> getRequests() async {
+    emit(FriendsLoading());
+    var result = await friendsRepo.getRequests();
+    result.fold((failuer) {
+      emit(RequestsFailuer(errMessage: failuer.errorMessage));
+    }, (requests) {
+      emit(RequestsSuccess(requests: requests));
+    });
+  }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_project/core/utils/app_routes.dart';
 import 'package:new_project/core/utils/colors_data.dart';
+import 'package:new_project/features/friends/presentation/manager/friends_cubit/friends_cubit.dart';
 
 class FriendBoxAction extends StatelessWidget {
   const FriendBoxAction({
@@ -33,7 +35,8 @@ class FriendBoxAction extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-             GoRouter.of(context).push(AppRoutes.kRequestsView);
+            GoRouter.of(context).push(AppRoutes.kRequestsView);
+            BlocProvider.of<FriendsCubit>(context).getRequests();
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,

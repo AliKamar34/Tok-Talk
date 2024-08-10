@@ -22,3 +22,19 @@ final class FriendsFailuer extends FriendsState {
 
   const FriendsFailuer({required this.errMessage});
 }
+
+
+final class RequestsSuccess extends FriendsState {
+  final List<PersonModel> requests;
+
+  const RequestsSuccess({required this.requests});
+
+}
+
+final class RequestsFailuer extends FriendsState {
+  final String errMessage;
+
+ const RequestsFailuer({required this.errMessage});
+
+   
+}
