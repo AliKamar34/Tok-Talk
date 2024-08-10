@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_project/features/auth/presentation/views/sign_in_view.dart';
 import 'package:new_project/features/auth/presentation/views/sign_up_view.dart';
-import 'package:new_project/features/friends/data/repos/friends_repo.dart';
 import 'package:new_project/features/friends/data/repos/friends_repo_impl.dart';
 import 'package:new_project/features/friends/presentation/manager/friends_cubit/friends_cubit.dart';
 import 'package:new_project/features/friends/presentation/views/requests_view.dart';

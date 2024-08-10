@@ -105,10 +105,10 @@ class FriendsRepoImpl extends FriendsRepo {
       return left(FirebaseExceptionFailure(e.toString()));
     }
   }
-  
+
   @override
-  Future<Either<Failure, void>> acceptRequest({required PersonModel personModel})async {
-   
+  Future<Either<Failure, void>> acceptRequest(
+      {required PersonModel personModel}) async {
     try {
       CollectionReference userFriends = FirebaseFirestore.instance
           .collection(UserCollectionData.userCollectionName)
@@ -126,7 +126,7 @@ class FriendsRepoImpl extends FriendsRepo {
             FirebaseAuth.instance.currentUser!.photoURL,
       });
 
-       CollectionReference myFriends = FirebaseFirestore.instance
+      CollectionReference myFriends = FirebaseFirestore.instance
           .collection(UserCollectionData.userCollectionName)
           .doc(FirebaseAuth.instance.currentUser!.email!)
           .collection(FriendCollentionData.friendCollectionName)
@@ -134,13 +134,20 @@ class FriendsRepoImpl extends FriendsRepo {
           .collection(FriendCollentionData.userFriendCollentionData);
 
       myFriends.doc(personModel.email).set({
-        FriendCollentionData.userFriendEmail:
-           personModel.email,
-        FriendCollentionData.userFriendName:
-           personModel.name,
-        FriendCollentionData.userFriendImage:
-         personModel.image,
+        FriendCollentionData.userFriendEmail: personModel.email,
+        FriendCollentionData.userFriendName: personModel.name,
+        FriendCollentionData.userFriendImage: personModel.image,
       });
+
+      CollectionReference myRequests = FirebaseFirestore.instance
+          .collection(UserCollectionData.userCollectionName)
+          .doc(FirebaseAuth.instance.currentUser!.email!)
+          .collection(FriendCollentionData.friendCollectionName)
+          .doc('${FirebaseAuth.instance.currentUser!.email!} Friends')
+          .collection(FriendCollentionData.userFriendRequestsCollectionData);
+      myRequests.doc(personModel.email).delete();
+
+    
 
       log('friernd accept  ${personModel.email}');
       return const Right(null);
