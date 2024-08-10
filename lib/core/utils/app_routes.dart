@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_project/features/auth/presentation/views/sign_in_view.dart';
 import 'package:new_project/features/auth/presentation/views/sign_up_view.dart';
+import 'package:new_project/features/friends/presentation/views/requests_view.dart';
 import 'package:new_project/features/home/presentation/views/home_view.dart';
 import 'package:new_project/features/home/presentation/views/chats_view.dart';
 import 'package:new_project/features/search/data/repos/search_repo_impl.dart';
@@ -16,6 +17,7 @@ abstract class AppRoutes {
   static const kSignInView = '/signInView';
   static const kSignUpView = '/SignUpView';
   static const kSearchView = '/SearchView';
+  static const kRequestsView = '/RequestsView';
 
   static const kBottomNavigationBarView = '/BottomNavigationBarView';
 
@@ -58,6 +60,12 @@ abstract class AppRoutes {
             create: (context) => SearchCubit(SearchRepoImpl()),
             child: const SearchView(),
           );
+        },
+      ),
+       GoRoute(
+        path: kRequestsView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const RequestsView();
         },
       ),
     ],

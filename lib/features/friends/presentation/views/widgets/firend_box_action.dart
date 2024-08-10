@@ -32,7 +32,9 @@ class FriendBoxAction extends StatelessWidget {
           ),
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+             GoRouter.of(context).push(AppRoutes.kRequestsView);
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shape: const RoundedRectangleBorder(
