@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_project/features/settings/presentation/views/widgets/cusotm_setting_app_bar.dart';
 import 'package:new_project/features/settings/presentation/views/widgets/settings_view_body.dart';
 
 class SettingsView extends StatelessWidget {
@@ -6,6 +7,13 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: SettingsViewBody(),);
+    return const Scaffold(
+      body: Column(
+        children: [
+          Expanded(child: CustomSettingAppBar()),
+          Expanded(flex: 2, child: SettingsViewBody()),
+        ],
+      ),
+    );
   }
 }

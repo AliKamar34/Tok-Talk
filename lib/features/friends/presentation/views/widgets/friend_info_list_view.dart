@@ -13,14 +13,13 @@ class FriendInfoListView extends StatelessWidget {
       builder: (context, state) {
         if (state is FriendsSuccess) {
           return ListView.builder(
-            itemCount: 10,
+            itemCount: state.friends.length,
             itemBuilder: (context, index) {
               return CustomFriendInfoButton(
                 personModel: PersonModel(
-                  email: 'ali@gmail.com',
-                  name: 'ali',
-                  image:
-                      'https://en.m.wikipedia.org/wiki/File:Sample_User_Icon.png',
+                  email: state.friends[index].email,
+                  name: state.friends[index].name,
+                  image: state.friends[index].image,
                 ),
                 onPressed: () {},
               );

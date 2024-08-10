@@ -11,30 +11,28 @@ class RequestsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FriendsCubit, FriendsState>(
       builder: (context, state) {
-       if(state is RequestsSuccess){
-         return ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return CustomRequestsInfoButton(
-              personModel: PersonModel(
-                email: 'ali@gmail.com',
-                name: 'ali',
-                image:
-                    'https://en.m.wikipedia.org/wiki/File:Sample_User_Icon.png',
-              ),
-              onPressed: () {},
-            );
-          },
-        );
-       }
-       else if (state is RequestsFailuer) {
+        if (state is RequestsSuccess) {
+          return ListView.builder(
+            itemCount: state.requests.length,
+            itemBuilder: (context, index) {
+              return CustomRequestsInfoButton(
+                personModel: PersonModel(
+                  email: state.requests[index].email,
+                  name: state.requests[index].name,
+                  image: state.requests[index].image,
+                ),
+                onPressed: () {},
+              );
+            },
+          );
+        } else if (state is RequestsFailuer) {
           return Text(state.errMessage);
         } else if (state is RequesLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is FriendsInitial){
+        } else if (state is FriendsInitial) {
           return const Text('initial state');
-        } else{
-           return const Text(' state');
+        } else {
+          return const Text(' state');
         }
       },
     );

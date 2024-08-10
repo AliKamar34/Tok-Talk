@@ -44,14 +44,16 @@ class FriendsRepoImpl extends FriendsRepo {
 
   @override
   Future<Either<Failure, List<PersonModel>>> getFriends() async {
-    CollectionReference chats = FirebaseFirestore.instance
+    CollectionReference friend = FirebaseFirestore.instance
         .collection(UserCollectionData.userCollectionName)
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection(MessagesCollectionData.messagesFriendsCollectionName);
+        .doc(FirebaseAuth.instance.currentUser!.email!)
+        .collection(FriendCollentionData.friendCollectionName)
+        .doc('${FirebaseAuth.instance.currentUser!.email!} Friends')
+        .collection(FriendCollentionData.userFriendCollentionData);
 
     try {
       List<PersonModel> friends = [];
-      chats
+      friend
           .orderBy(
             MessagesCollectionData.messagesPersonName,
             descending: true,
@@ -146,8 +148,6 @@ class FriendsRepoImpl extends FriendsRepo {
           .doc('${FirebaseAuth.instance.currentUser!.email!} Friends')
           .collection(FriendCollentionData.userFriendRequestsCollectionData);
       myRequests.doc(personModel.email).delete();
-
-    
 
       log('friernd accept  ${personModel.email}');
       return const Right(null);
