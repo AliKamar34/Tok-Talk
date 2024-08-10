@@ -83,7 +83,7 @@ class FriendsRepoImpl extends FriendsRepo {
         .doc(FirebaseAuth.instance.currentUser!.email)
         .collection(FriendCollentionData.friendCollectionName)
         .doc('${FirebaseAuth.instance.currentUser!.email} Friends')
-        .collection(FriendCollentionData.userFriendCollentionData);
+        .collection(FriendCollentionData.userFriendRequestsCollectionData);
 
     try {
       List<PersonModel> requestList = [];
@@ -103,6 +103,53 @@ class FriendsRepoImpl extends FriendsRepo {
       return right(requestList);
     } catch (e) {
       return left(FirebaseExceptionFailure(e.toString()));
+    }
+  }
+  
+  @override
+  Future<Either<Failure, void>> acceptRequest({required PersonModel personModel})async {
+   
+    try {
+      CollectionReference userFriends = FirebaseFirestore.instance
+          .collection(UserCollectionData.userCollectionName)
+          .doc(personModel.email)
+          .collection(FriendCollentionData.friendCollectionName)
+          .doc('${personModel.email} Friends')
+          .collection(FriendCollentionData.userFriendCollentionData);
+
+      userFriends.doc(FirebaseAuth.instance.currentUser!.email!).set({
+        FriendCollentionData.userFriendEmail:
+            FirebaseAuth.instance.currentUser!.email!,
+        FriendCollentionData.userFriendName:
+            FirebaseAuth.instance.currentUser!.displayName,
+        FriendCollentionData.userFriendImage:
+            FirebaseAuth.instance.currentUser!.photoURL,
+      });
+
+       CollectionReference myFriends = FirebaseFirestore.instance
+          .collection(UserCollectionData.userCollectionName)
+          .doc(FirebaseAuth.instance.currentUser!.email!)
+          .collection(FriendCollentionData.friendCollectionName)
+          .doc('${FirebaseAuth.instance.currentUser!.email!} Friends')
+          .collection(FriendCollentionData.userFriendCollentionData);
+
+      myFriends.doc(personModel.email).set({
+        FriendCollentionData.userFriendEmail:
+           personModel.email,
+        FriendCollentionData.userFriendName:
+           personModel.name,
+        FriendCollentionData.userFriendImage:
+         personModel.image,
+      });
+
+      log('friernd accept  ${personModel.email}');
+      return const Right(null);
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        return Left(FirebaseExceptionFailure.fromFirebaseException(e));
+      } else {
+        return Left(FirebaseExceptionFailure(e.toString()));
+      }
     }
   }
 }

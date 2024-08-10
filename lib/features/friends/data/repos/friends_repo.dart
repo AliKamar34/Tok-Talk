@@ -5,5 +5,6 @@ import 'package:new_project/features/home/data/models/person_model.dart';
 abstract class FriendsRepo {
   Future<Either<Failure, List<PersonModel>>> getFriends();
   Future<Either<Failure, void>> addFriend({required String personEmail});
-   Future<Either<Failure, List<PersonModel>>> getRequests();
+  Future<Either<Failure, List<PersonModel>>> getRequests();
+   Future<Either<Failure, void>> acceptRequest({required PersonModel personModel});
 }

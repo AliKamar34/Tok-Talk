@@ -35,8 +35,8 @@ class FriendBoxAction extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            GoRouter.of(context).push(AppRoutes.kRequestsView);
-            BlocProvider.of<FriendsCubit>(context).getRequests();
+             GoRouter.of(context).push(AppRoutes.kRequestsView);
+             
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
