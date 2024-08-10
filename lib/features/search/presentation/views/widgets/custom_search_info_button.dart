@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/core/utils/colors_data.dart';
 import 'package:new_project/core/widgets/custom_backgtound_container.dart';
 import 'package:new_project/core/widgets/custom_elevated_button.dart';
+import 'package:new_project/features/friends/presentation/manager/friends_cubit/friends_cubit.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
-import 'package:new_project/features/search/presentation/manager/search_cubit/search_cubit.dart';
 
 class CustomSearchInfoButton extends StatelessWidget {
   const CustomSearchInfoButton(
@@ -29,9 +29,9 @@ class CustomSearchInfoButton extends StatelessWidget {
         subtitle: Text(personModel.email),
         trailing: CustomElevateButton(
           onPressed: () {
-            BlocProvider.of<SearchCubit>(context)
-                .searchRepo
-                .addFriend(personEmail: personModel.email);
+            BlocProvider.of<FriendsCubit>(context)
+                .friendsRepo
+                .addFriend(personEmail: personModel.email);  
           },
           buttonTitle: 'send request',
           buttonColor: ColorAssetData.kScaffoldColor,

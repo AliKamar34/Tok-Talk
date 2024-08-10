@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
-import 'package:new_project/features/home/presentation/manager/friends_cubit/friends_cubit.dart';
-import 'package:new_project/features/home/presentation/views/widgets/custom_friend_info_button.dart';
+import 'package:new_project/features/friends/presentation/manager/friends_cubit/friends_cubit.dart';
+import 'package:new_project/features/friends/presentation/views/widgets/custom_friend_info_button.dart';
 
 class FriendInfoListView extends StatelessWidget {
   const FriendInfoListView({super.key});

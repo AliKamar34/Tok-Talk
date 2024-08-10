@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:new_project/core/utils/colors_data.dart';
-import 'package:new_project/features/home/presentation/views/friends_view.dart';
+import 'package:new_project/features/friends/presentation/views/friends_view.dart';
 import 'package:new_project/features/home/presentation/views/chats_view.dart';
 import 'package:new_project/features/home/presentation/views/groups_chats_view.dart';
 import 'package:new_project/features/settings/presentation/views/settings_view.dart';

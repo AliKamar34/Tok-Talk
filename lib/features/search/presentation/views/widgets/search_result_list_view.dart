@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/core/widgets/custom_loading_indicator.dart';
+import 'package:new_project/features/friends/data/repos/friends_repo_impl.dart';
+import 'package:new_project/features/friends/presentation/manager/friends_cubit/friends_cubit.dart';
 import 'package:new_project/features/search/presentation/manager/search_cubit/search_cubit.dart';
 import 'package:new_project/features/search/presentation/views/widgets/custom_Search_info_button.dart';
 
@@ -15,9 +17,12 @@ class SearchResultListView extends StatelessWidget {
           return ListView.builder(
             itemCount: state.searchResult.length,
             itemBuilder: (context, index) {
-              return CustomSearchInfoButton(
-                personModel: state.searchResult[index],
-                onPressed: () {},
+              return BlocProvider(
+                create: (context) => FriendsCubit(FriendsRepoImpl()),
+                child: CustomSearchInfoButton(
+                  personModel: state.searchResult[index],
+                  onPressed: () {},
+                ),
               );
             },
           );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_project/features/home/presentation/views/widgets/firend_box_action.dart';
+import 'package:new_project/features/friends/presentation/views/widgets/firend_box_action.dart';
 
 class CustomFriendsAppBar extends StatelessWidget {
   const CustomFriendsAppBar({
