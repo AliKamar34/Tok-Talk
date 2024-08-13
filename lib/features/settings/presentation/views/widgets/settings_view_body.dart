@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/core/widgets/custom_backgtound_container.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
+import 'package:new_project/features/settings/presentation/manager/cubit/settings_cubit.dart';
 import 'package:new_project/features/settings/presentation/views/widgets/curr_user_info_container.dart';
 
 class SettingsViewBody extends StatelessWidget {
@@ -47,7 +49,11 @@ class SettingsViewBody extends StatelessWidget {
                 ),
                 const Expanded(child: SizedBox()),
                 CustomBackgoundContainer(
-                  onPressed: () {},
+                  onPressed: () {
+                    BlocProvider.of<SettingsCubit>(context)
+                        .settingsRepo
+                        .logOutUser(context: context);
+                  },
                   child: const Padding(
                     padding: EdgeInsets.all(15),
                     child: Row(
@@ -69,4 +75,3 @@ class SettingsViewBody extends StatelessWidget {
     );
   }
 }
-

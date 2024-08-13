@@ -6,23 +6,20 @@ class CustomProfileInfoContainer extends StatelessWidget {
     super.key,
     required this.title,
     this.onPressed,
+    required this.subTitle,
+    required this.icon,
   });
-  final String title;
+  final String title, subTitle;
+  final IconData icon;
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return CustomBackgoundContainer(
       onPressed: onPressed,
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Row(
-          children: [
-            Text(
-              title,
-              style: const TextStyle(fontSize: 20),
-            ),
-          ],
-        ),
+      child: ListTile(
+        leading: Icon(icon),
+        title: Text(title),
+        subtitle: Text(subTitle),
       ),
     );
   }
