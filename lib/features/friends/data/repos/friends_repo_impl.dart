@@ -13,14 +13,14 @@ import 'package:new_project/features/home/data/models/person_model.dart';
 class FriendsRepoImpl extends FriendsRepo {
   @override
   Future<Either<Failure, void>> addFriend({required String personEmail}) async {
-    try {
-      CollectionReference requests = FirebaseFirestore.instance
-          .collection(UserCollectionData.userCollectionName)
-          .doc(personEmail)
-          .collection(FriendCollentionData.friendCollectionName)
-          .doc('$personEmail Friends')
-          .collection(FriendCollentionData.userFriendRequestsCollectionData);
+    CollectionReference requests = FirebaseFirestore.instance
+        .collection(UserCollectionData.userCollectionName)
+        .doc(personEmail)
+        .collection(FriendCollentionData.friendCollectionName)
+        .doc('$personEmail Friends')
+        .collection(FriendCollentionData.userFriendRequestsCollectionData);
 
+    try {
       requests.doc(FirebaseAuth.instance.currentUser!.email!).set({
         FriendCollentionData.userFriendEmail:
             FirebaseAuth.instance.currentUser!.email!,
@@ -28,7 +28,7 @@ class FriendsRepoImpl extends FriendsRepo {
             FirebaseAuth.instance.currentUser!.displayName,
         FriendCollentionData.requestFriendStatus: 'pendinghhhh',
         FriendCollentionData.userFriendImage:
-            FirebaseAuth.instance.currentUser!.photoURL,
+            FirebaseAuth.instance.currentUser!.photoURL ?? ' ',
       });
 
       log('requist sent to $personEmail');
@@ -43,8 +43,16 @@ class FriendsRepoImpl extends FriendsRepo {
   }
 
   @override
-  Future<Either<Failure, List<PersonModel>>> getFriends() async {
-    CollectionReference friend = FirebaseFirestore.instance
+  Future<Either<Failure, void>> acceptRequest(
+      {required PersonModel personModel}) async {
+    CollectionReference userFriends = FirebaseFirestore.instance
+        .collection(UserCollectionData.userCollectionName)
+        .doc(personModel.email)
+        .collection(FriendCollentionData.friendCollectionName)
+        .doc('${personModel.email} Friends')
+        .collection(FriendCollentionData.userFriendCollentionData);
+
+    CollectionReference myFriends = FirebaseFirestore.instance
         .collection(UserCollectionData.userCollectionName)
         .doc(FirebaseAuth.instance.currentUser!.email!)
         .collection(FriendCollentionData.friendCollectionName)
@@ -52,88 +60,14 @@ class FriendsRepoImpl extends FriendsRepo {
         .collection(FriendCollentionData.userFriendCollentionData);
 
     try {
-      List<PersonModel> friends = [];
-      friend
-          .orderBy(
-            MessagesCollectionData.messagesPersonName,
-            descending: true,
-          )
-          .snapshots()
-          .listen(
-        (event) {
-          for (var docs in event.docs) {
-            friends.add(PersonModel.fromjson(docs));
-          }
-          log('data form home repo');
-          log(friends.length.toString());
-          log(friends.toString());
-
-          log(event.docs.toString());
-          log(FirebaseAuth.instance.currentUser!.email.toString());
-        },
-      );
-      return right(friends);
-    } catch (e) {
-      return left(FirebaseExceptionFailure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<PersonModel>>> getRequests() async {
-    CollectionReference requests = FirebaseFirestore.instance
-        .collection(UserCollectionData.userCollectionName)
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection(FriendCollentionData.friendCollectionName)
-        .doc('${FirebaseAuth.instance.currentUser!.email} Friends')
-        .collection(FriendCollentionData.userFriendRequestsCollectionData);
-
-    try {
-      List<PersonModel> requestList = [];
-      requests
-          .orderBy(
-            MessagesCollectionData.messagesPersonName,
-            descending: true,
-          )
-          .snapshots()
-          .listen(
-        (event) {
-          for (var docs in event.docs) {
-            requestList.add(PersonModel.fromjson(docs));
-          }
-        },
-      );
-      return right(requestList);
-    } catch (e) {
-      return left(FirebaseExceptionFailure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, void>> acceptRequest(
-      {required PersonModel personModel}) async {
-    try {
-      CollectionReference userFriends = FirebaseFirestore.instance
-          .collection(UserCollectionData.userCollectionName)
-          .doc(personModel.email)
-          .collection(FriendCollentionData.friendCollectionName)
-          .doc('${personModel.email} Friends')
-          .collection(FriendCollentionData.userFriendCollentionData);
-
       userFriends.doc(FirebaseAuth.instance.currentUser!.email!).set({
         FriendCollentionData.userFriendEmail:
             FirebaseAuth.instance.currentUser!.email!,
         FriendCollentionData.userFriendName:
             FirebaseAuth.instance.currentUser!.displayName,
         FriendCollentionData.userFriendImage:
-            FirebaseAuth.instance.currentUser!.photoURL,
+            FirebaseAuth.instance.currentUser!.photoURL ?? ' ',
       });
-
-      CollectionReference myFriends = FirebaseFirestore.instance
-          .collection(UserCollectionData.userCollectionName)
-          .doc(FirebaseAuth.instance.currentUser!.email!)
-          .collection(FriendCollentionData.friendCollectionName)
-          .doc('${FirebaseAuth.instance.currentUser!.email!} Friends')
-          .collection(FriendCollentionData.userFriendCollentionData);
 
       myFriends.doc(personModel.email).set({
         FriendCollentionData.userFriendEmail: personModel.email,
@@ -158,5 +92,56 @@ class FriendsRepoImpl extends FriendsRepo {
         return Left(FirebaseExceptionFailure(e.toString()));
       }
     }
+  }
+
+  @override
+  Stream<Either<Failure, List<PersonModel>>> getFriends() {
+    CollectionReference friend = FirebaseFirestore.instance
+        .collection(UserCollectionData.userCollectionName)
+        .doc(FirebaseAuth.instance.currentUser!.email!)
+        .collection(FriendCollentionData.friendCollectionName)
+        .doc('${FirebaseAuth.instance.currentUser!.email!} Friends')
+        .collection(FriendCollentionData.userFriendCollentionData);
+
+    return friend
+        .orderBy(MessagesCollectionData.messagesPersonName, descending: true)
+        .snapshots()
+        .map((snapshot) {
+      try {
+        List<PersonModel> friends =
+            snapshot.docs.map((doc) => PersonModel.fromjson(doc)).toList();
+        log(friends.length.toString());
+        log('message from friends repo ');
+        return right(friends);
+      } catch (e) {
+        return left(FirebaseExceptionFailure(e.toString()));
+      }
+    });
+  }
+  
+  @override
+  Stream<Either<Failure, List<PersonModel>>> getRequests() {
+     CollectionReference requests = FirebaseFirestore.instance
+        .collection(UserCollectionData.userCollectionName)
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection(FriendCollentionData.friendCollectionName)
+        .doc('${FirebaseAuth.instance.currentUser!.email} Friends')
+        .collection(FriendCollentionData.userFriendRequestsCollectionData);
+
+   return requests
+        .orderBy(MessagesCollectionData.messagesPersonName, descending: true)
+        .snapshots()
+        .map((snapshot) {
+      try {
+        List<PersonModel> requestsList =
+            snapshot.docs.map((doc) => PersonModel.fromjson(doc)).toList();
+        log(requestsList.length.toString());
+        log('message from friends repo ');
+        return right(requestsList);
+      } catch (e) {
+        return left(FirebaseExceptionFailure(e.toString()));
+      }
+    });
+
   }
 }

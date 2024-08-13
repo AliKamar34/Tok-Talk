@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
@@ -9,9 +11,15 @@ class FriendInfoListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FriendsCubit, FriendsState>(
+    return BlocConsumer<FriendsCubit, FriendsState>(
+      listener: (context, state) {
+        
+      },
       builder: (context, state) {
         if (state is FriendsSuccess) {
+          log(state.friends.length.toString());
+          log('message from frirends list view');
+
           return ListView.builder(
             itemCount: state.friends.length,
             itemBuilder: (context, index) {
@@ -27,10 +35,12 @@ class FriendInfoListView extends StatelessWidget {
           );
         } else if (state is FriendsFailuer) {
           return Text(state.errMessage);
-        } else if (state is FriendsLoading) {
+        }
+        //  else if (state is FriendsLoading) {
+        //   return const Center(child: CircularProgressIndicator());
+        // }
+        else {
           return const Center(child: CircularProgressIndicator());
-        } else {
-          return const Text('initial state');
         }
       },
     );

@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:new_project/features/friends/data/repos/friends_repo.dart';
@@ -9,23 +12,49 @@ class FriendsCubit extends Cubit<FriendsState> {
 
   final FriendsRepo friendsRepo;
 
-  Future<void> getFriends() async {
+  StreamSubscription? _friendsSubscription;
+
+  void getFriends() {
     emit(FriendsLoading());
-    var result = await friendsRepo.getFriends();
-    result.fold((failuer) {
-      emit(FriendsFailuer(errMessage: failuer.errorMessage));
-    }, (friends) {
-      emit(FriendsSuccess(friends: friends));
-    });
+
+    _friendsSubscription = friendsRepo.getFriends().listen(
+      (event) {
+        event.fold(
+          (failure) {
+            emit(FriendsFailuer(errMessage: failure.errorMessage));
+          },
+          (friends) {
+            log(friends.length.toString());
+            log('message from cubit');
+            emit(FriendsSuccess(friends: friends));
+          },
+        );
+      },
+    );
   }
 
-  Future<void> getRequests() async {
+  @override
+  Future<void> close() {
+    _friendsSubscription?.cancel();
+    return super.close();
+  }
+
+ void getRequests() {
     emit(RequesLoading());
-    var result = await friendsRepo.getRequests();
-    result.fold((failuer) {
-      emit(RequestsFailuer(errMessage: failuer.errorMessage));
-    }, (requests) {
-      emit(RequestsSuccess(requests: requests));
-    });
+
+    _friendsSubscription = friendsRepo.getRequests().listen(
+      (event) {
+        event.fold(
+          (failure) {
+            emit(RequestsFailuer(errMessage: failure.errorMessage));
+          },
+          (requests) {
+            log(requests.length.toString());
+            log('message from cubit');
+            emit(RequestsSuccess(requests: requests));
+          },
+        );
+      },
+    );
   }
 }

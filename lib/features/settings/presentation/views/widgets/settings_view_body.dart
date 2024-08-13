@@ -57,16 +57,14 @@ class SettingsViewBody extends StatelessWidget {
           onPressed: () {},
           child: const Padding(
             padding: EdgeInsets.all(15),
-            child: Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Log out',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ],
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Log out',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ],
             ),
           ),
         ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:new_project/core/widgets/custom_backgtound_container.dart';
 
@@ -14,17 +13,15 @@ class CustomProfileInfoContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomBackgoundContainer(
       onPressed: onPressed,
-      child: Expanded(
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Row(
-            children: [
-              Text(
-                title,
-                style: const TextStyle(fontSize: 20),
-              ),
-            ],
-          ),
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Row(
+          children: [
+            Text(
+              title,
+              style: const TextStyle(fontSize: 20),
+            ),
+          ],
         ),
       ),
     );

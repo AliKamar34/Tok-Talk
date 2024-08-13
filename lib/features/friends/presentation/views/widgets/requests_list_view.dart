@@ -12,19 +12,21 @@ class RequestsListView extends StatelessWidget {
     return BlocBuilder<FriendsCubit, FriendsState>(
       builder: (context, state) {
         if (state is RequestsSuccess) {
-          return ListView.builder(
-            itemCount: state.requests.length,
-            itemBuilder: (context, index) {
-              return CustomRequestsInfoButton(
-                personModel: PersonModel(
-                  email: state.requests[index].email,
-                  name: state.requests[index].name,
-                  image: state.requests[index].image,
-                ),
-                onPressed: () {},
-              );
-            },
-          );
+          return state.requests.isEmpty
+              ? const Center(child: Text('You Have No Requests'))
+              : ListView.builder(
+                  itemCount: state.requests.length,
+                  itemBuilder: (context, index) {
+                    return CustomRequestsInfoButton(
+                      personModel: PersonModel(
+                        email: state.requests[index].email,
+                        name: state.requests[index].name,
+                        image: state.requests[index].image,
+                      ),
+                      onPressed: () {},
+                    );
+                  },
+                );
         } else if (state is RequestsFailuer) {
           return Text(state.errMessage);
         } else if (state is RequesLoading) {

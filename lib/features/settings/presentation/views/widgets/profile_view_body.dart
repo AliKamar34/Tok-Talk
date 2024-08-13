@@ -11,9 +11,7 @@ class ProfileViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 12,
-        ),
+        const Expanded(child: SizedBox()),
         Flexible(
           child: CustomCircleImage(
             imageUrl: FirebaseAuth.instance.currentUser!.photoURL ?? '',
@@ -32,7 +30,7 @@ class ProfileViewBody extends StatelessWidget {
         CustomProfileInfoContainer(
           title: FirebaseAuth.instance.currentUser!.email!,
         ),
-        const Expanded(child: SizedBox()),
+        const Expanded(flex: 2, child: SizedBox()),
       ],
     );
   }
