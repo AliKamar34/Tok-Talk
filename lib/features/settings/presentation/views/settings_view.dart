@@ -10,8 +10,8 @@ class SettingsView extends StatelessWidget {
     return const Scaffold(
       body: Column(
         children: [
-          Expanded(child: CustomSettingAppBar()),
-          Expanded(flex: 2, child: SettingsViewBody()),
+          CustomSettingAppBar(),
+          Expanded(child: SettingsViewBody()),
         ],
       ),
     );

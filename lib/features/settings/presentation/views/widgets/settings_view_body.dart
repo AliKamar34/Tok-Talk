@@ -1,68 +1,65 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:new_project/core/utils/app_routes.dart';
 import 'package:new_project/core/widgets/custom_backgtound_container.dart';
+import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
+import 'package:new_project/features/settings/presentation/views/widgets/curr_user_info_container.dart';
 
 class SettingsViewBody extends StatelessWidget {
   const SettingsViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: 24,
-        ),
-        CustomBackgoundContainer(
-          onPressed: () {
-            GoRouter.of(context).push(AppRoutes.kProfileView);
-          },
-          child: const Padding(
-            padding: EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return CustomScrollView(
+      slivers: [
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: SizedBox(
+            height: MediaQuery.sizeOf(context).height,
+            child: Column(
               children: [
-                Text(
-                  'Profile',
-                  style: TextStyle(fontSize: 18),
+                Flexible(
+                  child: SizedBox(
+                    width: 250,
+                    child: CustomCircleImage(
+                      imageUrl:
+                          FirebaseAuth.instance.currentUser!.photoURL ?? '',
+                    ),
+                  ),
                 ),
-                RotatedBox(
-                    quarterTurns: 2,
-                    child: Icon(Icons.arrow_back_ios_new_outlined))
-              ],
-            ),
-          ),
-        ),
-        CustomBackgoundContainer(
-          onPressed: () {},
-          child: const Padding(
-            padding: EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'dark mode',
-                  style: TextStyle(fontSize: 18),
+                const CurrUserInfo(),
+                CustomBackgoundContainer(
+                  onPressed: () {},
+                  child: const Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'dark mode',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        RotatedBox(
+                            quarterTurns: 2,
+                            child: Icon(Icons.arrow_back_ios_new_outlined))
+                      ],
+                    ),
+                  ),
                 ),
-                RotatedBox(
-                    quarterTurns: 2,
-                    child: Icon(Icons.arrow_back_ios_new_outlined))
-              ],
-            ),
-          ),
-        ),
-        const Expanded(child: SizedBox()),
-        CustomBackgoundContainer(
-          onPressed: () {},
-          child: const Padding(
-            padding: EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Log out',
-                  style: TextStyle(fontSize: 18),
+                const Expanded(child: SizedBox()),
+                CustomBackgoundContainer(
+                  onPressed: () {},
+                  child: const Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Log out',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -72,3 +69,4 @@ class SettingsViewBody extends StatelessWidget {
     );
   }
 }
+
