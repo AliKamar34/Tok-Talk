@@ -5,38 +5,41 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/features/friends/data/repos/friends_repo.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
-part 'friends_state.dart';
 
-class FriendsCubit extends Cubit<FriendsState> {
-  FriendsCubit(this.friendsRepo) : super(FriendsInitial());
+part 'requests_state.dart';
+
+class RequestsCubit extends Cubit<RequestsState> {
+  RequestsCubit(this.friendsRepo) : super(RequestsInitial());
 
   final FriendsRepo friendsRepo;
 
-  StreamSubscription? _friendsSubscription;
+    StreamSubscription? _friendsSubscription;
+    
+     
 
-  void getFriends() {
-    emit(FriendsLoading());
+ void getRequests() {
+    emit(RequesLoading());
 
-    _friendsSubscription = friendsRepo.getFriends().listen(
+    _friendsSubscription = friendsRepo.getRequests().listen(
       (event) {
         event.fold(
           (failure) {
-            emit(FriendsFailuer(errMessage: failure.errorMessage));
+            emit(RequestsFailuer(errMessage: failure.errorMessage));
           },
-          (friends) {
-            log(friends.length.toString());
+          (requests) {
+            log(requests.length.toString());
             log('message from cubit');
-            emit(FriendsSuccess(friends: friends));
+            emit(RequestsSuccess(requests: requests));
           },
         );
       },
     );
   }
 
+  
   @override
   Future<void> close() {
     _friendsSubscription?.cancel();
     return super.close();
   }
-
 }

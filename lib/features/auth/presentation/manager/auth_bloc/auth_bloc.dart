@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/features/auth/data/repos/auth_repo.dart';
 
 part 'auth_event.dart';
