@@ -24,10 +24,10 @@ class HomeViewState extends State<HomeView> {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: Container(
-          margin: EdgeInsets.all(displayWidth * .05),
-          height: displayWidth * .155,
+          margin: const EdgeInsets.all(12),
+          height: 65,
           decoration: BoxDecoration(
-            color:colorAssetData(context,ColorEnum.primaryColor),
+            color: colorAssetData(context, ColorEnum.primaryColor),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(.1),
@@ -40,7 +40,7 @@ class HomeViewState extends State<HomeView> {
           child: ListView.builder(
             itemCount: 4,
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: displayWidth * .02),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             itemBuilder: (context, index) => InkWell(
               onTap: () {
                 setState(() {
@@ -62,12 +62,12 @@ class HomeViewState extends State<HomeView> {
                     child: AnimatedContainer(
                       duration: const Duration(seconds: 1),
                       curve: Curves.fastLinearToSlowEaseIn,
-                      height: index == currentIndex ? displayWidth * .12 : 0,
+                      height: index == currentIndex ? 50 : 0,
                       width: index == currentIndex ? displayWidth * .32 : 0,
                       decoration: BoxDecoration(
                         color: index == currentIndex
-                            ? colorAssetData(context,ColorEnum.scaffoldColor)
-                            :colorAssetData(context,ColorEnum.primaryColor),
+                            ? colorAssetData(context, ColorEnum.scaffoldColor)
+                            : colorAssetData(context, ColorEnum.primaryColor),
                         borderRadius: BorderRadius.circular(50),
                       ),
                     ),
@@ -98,8 +98,9 @@ class HomeViewState extends State<HomeView> {
                                 index == currentIndex
                                     ? listOfStrings[index]
                                     : '',
-                                style:  TextStyle(
-                                  color: colorAssetData(context,ColorEnum.secondaryColor),
+                                style: TextStyle(
+                                  color: colorAssetData(
+                                      context, ColorEnum.secondaryColor),
                                   fontWeight: FontWeight.w600,
                                   fontSize: 15,
                                 ),
@@ -118,9 +119,10 @@ class HomeViewState extends State<HomeView> {
                             ),
                             Icon(
                               listOfIcons[index],
-                              size: displayWidth * .060,
+                              size: 32,
                               color: index == currentIndex
-                                  ? colorAssetData(context,ColorEnum.secondaryColor)
+                                  ? colorAssetData(
+                                      context, ColorEnum.secondaryColor)
                                   : Colors.white60,
                             ),
                           ],

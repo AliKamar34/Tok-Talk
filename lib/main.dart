@@ -60,9 +60,7 @@ class ChatGramApp extends StatelessWidget {
               routerConfig: AppRoutes.router,
               debugShowCheckedModeBanner: false,
               theme: ThemeData.dark().copyWith(
-                scaffoldBackgroundColor:
-                const Color(0xff161616),
-                  
+                scaffoldBackgroundColor: const Color(0xff161616),
               ),
             );
           } else if (state is ThemeLight) {
@@ -79,8 +77,7 @@ class ChatGramApp extends StatelessWidget {
             routerConfig: AppRoutes.router,
             debugShowCheckedModeBanner: false,
             theme: ThemeData.dark().copyWith(
-              scaffoldBackgroundColor:
-                  colorAssetData(context, ColorEnum.scaffoldColor),
+              scaffoldBackgroundColor: const Color(0xff161616),
             ),
           );
         },
