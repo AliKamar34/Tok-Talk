@@ -5,6 +5,7 @@ import 'package:new_project/core/utils/colors_data.dart';
 import 'package:new_project/features/friends/presentation/views/friends_view.dart';
 import 'package:new_project/features/home/presentation/views/chats_view.dart';
 import 'package:new_project/features/home/presentation/views/groups_chats_view.dart';
+import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 import 'package:new_project/features/settings/presentation/views/settings_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -26,7 +27,7 @@ class HomeViewState extends State<HomeView> {
           margin: EdgeInsets.all(displayWidth * .05),
           height: displayWidth * .155,
           decoration: BoxDecoration(
-            color: ColorAssetData.kprimaryColor,
+            color:colorAssetData(context,ColorEnum.primaryColor),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(.1),
@@ -65,8 +66,8 @@ class HomeViewState extends State<HomeView> {
                       width: index == currentIndex ? displayWidth * .32 : 0,
                       decoration: BoxDecoration(
                         color: index == currentIndex
-                            ? ColorAssetData.kScaffoldColor
-                            : ColorAssetData.kprimaryColor,
+                            ? colorAssetData(context,ColorEnum.scaffoldColor)
+                            :colorAssetData(context,ColorEnum.primaryColor),
                         borderRadius: BorderRadius.circular(50),
                       ),
                     ),
@@ -97,8 +98,8 @@ class HomeViewState extends State<HomeView> {
                                 index == currentIndex
                                     ? listOfStrings[index]
                                     : '',
-                                style: const TextStyle(
-                                  color: ColorAssetData.kSecondaryColor,
+                                style:  TextStyle(
+                                  color: colorAssetData(context,ColorEnum.secondaryColor),
                                   fontWeight: FontWeight.w600,
                                   fontSize: 15,
                                 ),
@@ -119,7 +120,7 @@ class HomeViewState extends State<HomeView> {
                               listOfIcons[index],
                               size: displayWidth * .060,
                               color: index == currentIndex
-                                  ? ColorAssetData.kSecondaryColor
+                                  ? colorAssetData(context,ColorEnum.secondaryColor)
                                   : Colors.white60,
                             ),
                           ],

@@ -7,6 +7,7 @@ import 'package:new_project/core/widgets/custom_snack_bar.dart';
 import 'package:new_project/features/friends/presentation/manager/friends_cubit/friends_cubit.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
+import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 
 class CustomSearchInfoButton extends StatelessWidget {
   const CustomSearchInfoButton(
@@ -37,7 +38,7 @@ class CustomSearchInfoButton extends StatelessWidget {
             showSnackBar(context, 'Reuqest Sent');
           },
           buttonTitle: 'send request',
-          buttonColor: ColorAssetData.kScaffoldColor,
+          buttonColor: colorAssetData(context,ColorEnum.scaffoldColor),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:new_project/core/utils/colors_data.dart';
+import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, required this.widget, required this.onPressed});
@@ -11,7 +12,7 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: ColorAssetData.kSecondaryColor,
+        backgroundColor: colorAssetData(context,ColorEnum.secondaryColor),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
         ),

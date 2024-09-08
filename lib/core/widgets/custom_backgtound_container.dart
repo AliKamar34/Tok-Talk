@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:new_project/core/utils/colors_data.dart';
+import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 
 class CustomBackgoundContainer extends StatelessWidget {
   const CustomBackgoundContainer({
@@ -23,7 +24,7 @@ class CustomBackgoundContainer extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorAssetData.kprimaryColor,
+          backgroundColor: colorAssetData(context , ColorEnum.primaryColor),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),

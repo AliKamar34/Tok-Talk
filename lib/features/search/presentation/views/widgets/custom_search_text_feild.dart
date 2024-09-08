@@ -1,8 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_project/core/utils/colors_data.dart';
 import 'package:new_project/features/search/presentation/manager/search_cubit/search_cubit.dart';
+import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 
 class CustomSearchTextFeild extends StatelessWidget {
   const CustomSearchTextFeild({super.key, this.onPressed});
@@ -26,19 +28,19 @@ class CustomSearchTextFeild extends StatelessWidget {
               const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
           hintText: 'Serach',
           filled: true,
-          fillColor: ColorAssetData.kprimaryColor,
-          enabledBorder: buildOutLineBorder(),
-          focusedBorder: buildOutLineBorder(),
+          fillColor: colorAssetData(context,ColorEnum.primaryColor),
+          enabledBorder: buildOutLineBorder(context),
+          focusedBorder: buildOutLineBorder(context),
         ),
       ),
     );
   }
 
-  OutlineInputBorder buildOutLineBorder() {
+  OutlineInputBorder buildOutLineBorder(BuildContext context) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(
-        color: ColorAssetData.kprimaryColor,
+      borderSide:  BorderSide(
+        color: colorAssetData(context,ColorEnum.primaryColor),
       ),
     );
   }

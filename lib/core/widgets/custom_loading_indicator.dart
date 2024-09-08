@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:new_project/core/utils/colors_data.dart';
+import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 
 class CustomLoadingIndicator extends StatelessWidget {
   const CustomLoadingIndicator({
@@ -9,10 +10,10 @@ class CustomLoadingIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LoadingIndicator(
+    return  LoadingIndicator(
       indicatorType: Indicator.ballScale,
       colors: [
-        ColorAssetData.kSecondaryColor,
+       colorAssetData(context,ColorEnum.secondaryColor),
       ],
       strokeWidth: 0.23,
       pathBackgroundColor: Colors.black,

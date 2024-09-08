@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_project/core/utils/colors_data.dart';
+import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -34,7 +35,7 @@ class CustomTextField extends StatelessWidget {
       onChanged: onChanged,
 
       decoration: InputDecoration(
-        fillColor: ColorAssetData.kprimaryColor,
+        fillColor: colorAssetData(context,ColorEnum.primaryColor),
         filled: true,
         prefixIcon: icon,
         suffixIcon: secoundIcon,

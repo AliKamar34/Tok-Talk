@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/core/widgets/custom_backgtound_container.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
-import 'package:new_project/features/settings/presentation/manager/cubit/settings_cubit.dart';
+import 'package:new_project/features/settings/presentation/manager/setting_cubit/settings_cubit.dart';
 import 'package:new_project/features/settings/presentation/views/widgets/curr_user_info_container.dart';
+import 'package:new_project/features/settings/presentation/views/widgets/custom_switcher.dart';
 
 class SettingsViewBody extends StatelessWidget {
   const SettingsViewBody({super.key});
@@ -40,9 +41,7 @@ class SettingsViewBody extends StatelessWidget {
                           'dark mode',
                           style: TextStyle(fontSize: 18),
                         ),
-                        RotatedBox(
-                            quarterTurns: 2,
-                            child: Icon(Icons.arrow_back_ios_new_outlined))
+                        CustomSwitcher(),
                       ],
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_project/core/utils/colors_data.dart';
+import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 
 class CustomElevateButton extends StatelessWidget {
   const CustomElevateButton({
@@ -19,7 +20,7 @@ class CustomElevateButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(backgroundColor:buttonColor),
       child: Text(
         buttonTitle,
-        style: const TextStyle(color: ColorAssetData.kSecondaryColor),
+        style:  TextStyle(color: colorAssetData(context , ColorEnum.secondaryColor)),
       ),
     );
   }

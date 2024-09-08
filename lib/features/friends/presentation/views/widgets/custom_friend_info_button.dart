@@ -4,6 +4,7 @@ import 'package:new_project/core/widgets/custom_backgtound_container.dart';
 import 'package:new_project/core/widgets/custom_elevated_button.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
+import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 
 class CustomFriendInfoButton extends StatelessWidget {
   const CustomFriendInfoButton(
@@ -29,7 +30,7 @@ class CustomFriendInfoButton extends StatelessWidget {
               // go to chat 
             },
             buttonTitle: 'chat',
-            buttonColor: ColorAssetData.kScaffoldColor,
+            buttonColor:colorAssetData(context,ColorEnum.scaffoldColor),
           )),
     );
   }

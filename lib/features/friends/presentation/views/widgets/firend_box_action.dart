@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_project/core/utils/app_routes.dart';
 import 'package:new_project/core/utils/colors_data.dart';
+import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 
 class FriendBoxAction extends StatelessWidget {
   const FriendBoxAction({
@@ -26,9 +27,9 @@ class FriendBoxAction extends StatelessWidget {
             ),
             padding: const EdgeInsets.all(8),
           ),
-          child: const Text(
+          child:  Text(
             'Search',
-            style: TextStyle(color: ColorAssetData.kSecondaryColor),
+            style: TextStyle(color: colorAssetData(context,ColorEnum.secondaryColor)),
           ),
         ),
         ElevatedButton(
@@ -46,9 +47,9 @@ class FriendBoxAction extends StatelessWidget {
             ),
             padding: const EdgeInsets.all(8),
           ),
-          child: const Text(
+          child:  Text(
             'Requests',
-            style: TextStyle(color: ColorAssetData.kSecondaryColor),
+            style: TextStyle(color: colorAssetData(context,ColorEnum.secondaryColor)),
           ),
         ),
       ],
