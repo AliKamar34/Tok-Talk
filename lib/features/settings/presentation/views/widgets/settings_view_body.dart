@@ -34,9 +34,9 @@ class SettingsViewBody extends StatelessWidget {
                 ),
                 CustomBackgoundContainer(
                   onPressed: () {
-                    BlocProvider.of<SettingsCubit>(context)
-                        .settingsRepo
-                        .upLoadImage();
+                    BlocProvider.of<SettingsCubit>(context).updateImage();
+                    // .settingsRepo
+                    // .upLoadImage();
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(12),
@@ -45,7 +45,7 @@ class SettingsViewBody extends StatelessWidget {
                 ),
                 const CurrUserInfo(),
                 CustomBackgoundContainer(
-                  onPressed: () {},
+                  onPressed: (){},
                   child: const Padding(
                     padding: EdgeInsets.all(15),
                     child: Row(

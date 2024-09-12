@@ -7,4 +7,14 @@ part 'settings_state.dart';
 class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit(this.settingsRepo) : super(SettingsInitial());
   final SettingsRepo settingsRepo;
+
+  Future<void> updateImage() async {
+    emit(SettingsLoading());
+    var result = await settingsRepo.upLoadImage();
+ result.fold((failuer) {
+      emit(SettingsFailuer(errMessage: failuer.errorMessage));
+    }, (_) {
+      emit(SettingsSuccess());
+    });
+  }
 }
