@@ -13,16 +13,7 @@ class CurrUserInfo extends StatelessWidget {
         const SizedBox(
           height: 50,
         ),
-        // CustomBackgoundContainer(
-        //   onPressed: () {},
-        //   child: const Padding(
-        //     padding: EdgeInsets.all(15),
-        //     child: Text(
-        //       'Change photo',
-        //       style: TextStyle(fontSize: 18),
-        //     ),
-        //   ),
-        // ),
+     
         CustomProfileInfoContainer(
           title: 'Name',
           subTitle: FirebaseAuth.instance.currentUser!.displayName!,

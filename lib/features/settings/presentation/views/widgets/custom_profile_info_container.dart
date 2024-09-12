@@ -12,6 +12,7 @@ class CustomProfileInfoContainer extends StatelessWidget {
   final String title, subTitle;
   final IconData icon;
   final void Function()? onPressed;
+
   @override
   Widget build(BuildContext context) {
     return CustomBackgoundContainer(

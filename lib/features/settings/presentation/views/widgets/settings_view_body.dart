@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/core/widgets/custom_backgtound_container.dart';
+import 'package:new_project/core/widgets/custom_loading_indicator.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
 import 'package:new_project/features/settings/presentation/manager/setting_cubit/settings_cubit.dart';
 import 'package:new_project/features/settings/presentation/views/widgets/curr_user_info_container.dart';
@@ -35,17 +36,34 @@ class SettingsViewBody extends StatelessWidget {
                 CustomBackgoundContainer(
                   onPressed: () {
                     BlocProvider.of<SettingsCubit>(context).updateImage();
-                    // .settingsRepo
-                    // .upLoadImage();
                   },
-                  child: const Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Text('Change Photo'),
+                  child: BlocBuilder<SettingsCubit, SettingsState>(
+                    builder: (context, state) {
+                      if (state is SettingsLoading) {
+                        return const FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: SizedBox(
+                            height: 20,
+                            child: CustomLoadingIndicator(),
+                          ),
+                        );
+                      } else if (state is SettingsSuccess) {
+                        return const Padding(
+                          padding: EdgeInsets.all(12),
+                          child: Text('success'),
+                        );
+                      } else {
+                        return const Padding(
+                          padding: EdgeInsets.all(12),
+                          child: Text('Change Photo'),
+                        );
+                      }
+                    },
                   ),
                 ),
                 const CurrUserInfo(),
                 CustomBackgoundContainer(
-                  onPressed: (){},
+                  onPressed: () {},
                   child: const Padding(
                     padding: EdgeInsets.all(15),
                     child: Row(
