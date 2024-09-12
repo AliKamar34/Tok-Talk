@@ -29,6 +29,20 @@ class SettingsViewBody extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CustomBackgoundContainer(
+                  onPressed: () {
+                    BlocProvider.of<SettingsCubit>(context)
+                        .settingsRepo
+                        .upLoadImage();
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(12),
+                    child: Text('Change Photo'),
+                  ),
+                ),
                 const CurrUserInfo(),
                 CustomBackgoundContainer(
                   onPressed: () {},
