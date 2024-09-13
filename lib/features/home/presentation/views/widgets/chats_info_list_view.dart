@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:new_project/core/utils/app_routes.dart';
 import 'package:new_project/features/home/presentation/manager/chats_cubit/chats_cubit.dart';
 import 'package:new_project/features/home/presentation/views/widgets/chat_info_button.dart';
 
@@ -24,7 +26,12 @@ class ChatsInfoListView extends StatelessWidget {
             itemBuilder: (context, index) {
               return CustomChatInfoButton(
                 personModel: state.persons[index],
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context).push(
+                    AppRoutes.kPrivateChateView,
+                    extra: state.persons[index],
+                  );
+                },
               );
             },
           );

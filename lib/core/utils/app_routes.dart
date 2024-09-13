@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:new_project/features/auth/presentation/views/sign_in_view.dart';
 import 'package:new_project/features/auth/presentation/views/sign_up_view.dart';
+import 'package:new_project/features/chat/presentation/views/private_chat_view.dart';
 import 'package:new_project/features/friends/data/repos/friends_repo_impl.dart';
 import 'package:new_project/features/friends/presentation/manager/requests_cubit/requests_cubit.dart';
 import 'package:new_project/features/friends/presentation/views/requests_view.dart';
+import 'package:new_project/features/home/data/models/person_model.dart';
 import 'package:new_project/features/home/presentation/views/home_view.dart';
 import 'package:new_project/features/home/presentation/views/chats_view.dart';
 import 'package:new_project/features/search/data/repos/search_repo_impl.dart';
@@ -22,6 +24,7 @@ abstract class AppRoutes {
   static const kSearchView = '/SearchView';
   static const kRequestsView = '/RequestsView';
   static const kProfileView = '/profileView';
+  static const kPrivateChateView = '/privateChatView';
 
   static const kBottomNavigationBarView = '/BottomNavigationBarView';
 
@@ -70,7 +73,8 @@ abstract class AppRoutes {
         path: kRequestsView,
         builder: (BuildContext context, GoRouterState state) {
           return BlocProvider(
-            create: (context) => RequestsCubit(FriendsRepoImpl())..getRequests(),
+            create: (context) =>
+                RequestsCubit(FriendsRepoImpl())..getRequests(),
             child: const RequestsView(),
           );
         },
@@ -79,6 +83,14 @@ abstract class AppRoutes {
         path: kProfileView,
         builder: (BuildContext context, GoRouterState state) {
           return const ProfileView();
+        },
+      ),
+        GoRoute(
+        path: kPrivateChateView,
+        builder: (BuildContext context, GoRouterState state) {
+          return  PrivateChatView(
+            personModel: state.extra as PersonModel,
+          );
         },
       ),
     ],
