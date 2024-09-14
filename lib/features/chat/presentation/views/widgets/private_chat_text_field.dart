@@ -1,4 +1,6 @@
+import 'dart:developer';
 
+import 'package:chat_bubbles/message_bars/message_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:new_project/core/utils/colors_data.dart';
 import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
@@ -8,44 +10,28 @@ class PrivateChatTextFeild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        maxLines: 4,
-        minLines: 1,
-        onChanged: (value) {},
-        decoration: InputDecoration(
-          fillColor: colorAssetData(context, ColorEnum.primaryColor),
-          filled: true,
-          isDense: true,
-          prefixIcon: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.camera_alt),
-          ),
-          suffixIcon: IconButton(
-            onPressed: () {},
-            icon: Transform.rotate(
-              angle: -35 * (3.1415926535897932 / 180),
-              child: Icon(
-                Icons.send_rounded,
-                color: colorAssetData(context, ColorEnum.scaffoldColor),
-                size: 26,
-              ),
-            ),
-          ),
-          hintText: 'Write a Message',
-          hintStyle: const TextStyle(color: Colors.white),
-          enabledBorder: customBorder(),
-          border: customBorder(),
-        ),
-      ),
-    );
-  }
+    return MessageBar(
+      onSend: (_) => log('gfg'), // function to send message
+      messageBarColor: Colors.transparent,
 
-  OutlineInputBorder customBorder() {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(20),
-      borderSide: BorderSide.none,
+      messageBarHintStyle: TextStyle(
+        color: colorAssetData(context, ColorEnum.primaryColor).withOpacity(0.5),
+        fontSize: 12,
+      ),
+      replyWidgetColor: colorAssetData(context, ColorEnum.primaryColor),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: InkWell(
+            child: Icon(
+              Icons.camera_alt,
+              color: colorAssetData(context, ColorEnum.primaryColor),
+              size: 24,
+            ),
+            onTap: () {}, // function to send image
+          ),
+        ),
+      ],
     );
   }
 }
