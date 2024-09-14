@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_project/features/chat/presentation/views/widgets/private_caht_app_bar.dart';
+import 'package:new_project/features/chat/presentation/views/widgets/private_chat_text_field.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
 
 class PrivateChatViewBody extends StatelessWidget {
@@ -12,7 +13,22 @@ class PrivateChatViewBody extends StatelessWidget {
         PrivateChatAppBar(
           personModel: personModel,
         ),
+        const Expanded(child: PrivateChatListViewMessages()),
+        const PrivateChatTextFeild(),
       ],
     );
+  }
+}
+
+class PrivateChatListViewMessages extends StatelessWidget {
+  const PrivateChatListViewMessages({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: 20,
+        itemBuilder: ((context, index) {
+          return const Text('data');
+        }));
   }
 }

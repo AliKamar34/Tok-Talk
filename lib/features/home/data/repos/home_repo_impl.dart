@@ -22,7 +22,6 @@ class HomeRepoImpl extends HomeRepo {
       List<PersonModel> persons = [];
       chats
           .orderBy(
-            
             MessagesCollectionData.messagePersonLastTime,
             descending: true,
           )
