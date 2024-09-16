@@ -1,4 +1,4 @@
-import 'package:new_project/core/utils/messages_collection_data.dart';
+import 'package:new_project/core/utils/chats_collection_data.dart';
 
 class PersonModel {
   final String name;
@@ -9,9 +9,9 @@ class PersonModel {
 
   factory PersonModel.fromjson(jsonData) {
     return PersonModel(
-      name: jsonData[MessagesCollectionData.messagesPersonName],
-      email: jsonData[MessagesCollectionData.messagesPersonEmail],
-      image: jsonData[MessagesCollectionData.messagesPersonImage],
+      name: jsonData[ChatsCollectionData.messagesPersonName],
+      email: jsonData[ChatsCollectionData.messagesPersonEmail],
+      image: jsonData[ChatsCollectionData.messagesPersonImage],
     );
   }
 }

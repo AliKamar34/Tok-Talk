@@ -15,6 +15,8 @@ Color colorAssetData(BuildContext context, ColorEnum colorType) {
         return const Color(0xffD7151A);
       case ColorEnum.primaryColor:
         return const Color(0xff303030);
+      case ColorEnum.textColor:
+        return  Colors.white;
 
       default:
         return const Color(0xff161616);
@@ -29,6 +31,9 @@ Color colorAssetData(BuildContext context, ColorEnum colorType) {
         return const Color(0xffCCD5AE);
       case ColorEnum.secondaryColor:
         return const Color(0xff6D4722);
+         case ColorEnum.textColor:
+        return   Colors.black;
+
       default:
         return const Color(0xffE9EDC9);
     }

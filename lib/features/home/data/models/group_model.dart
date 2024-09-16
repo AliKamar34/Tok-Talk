@@ -1,4 +1,4 @@
-import 'package:new_project/core/utils/messages_collection_data.dart';
+import 'package:new_project/core/utils/chats_collection_data.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
 
 class GroupModel {
@@ -10,9 +10,9 @@ class GroupModel {
 
   factory GroupModel.formJson(jsonData) {
     return GroupModel(
-      name: jsonData[MessagesCollectionData.messsageGroupName],
-      image: jsonData[MessagesCollectionData.messsageGroupImage],
-      members: jsonData[MessagesCollectionData.messsageGroupmembers],
+      name: jsonData[ChatsCollectionData.messsageGroupName],
+      image: jsonData[ChatsCollectionData.messsageGroupImage],
+      members: jsonData[ChatsCollectionData.messsageGroupmembers],
     );
   }
 }

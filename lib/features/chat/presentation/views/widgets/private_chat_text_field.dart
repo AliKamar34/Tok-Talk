@@ -13,9 +13,10 @@ class PrivateChatTextFeild extends StatelessWidget {
     return MessageBar(
       onSend: (_) => log('gfg'), // function to send message
       messageBarColor: Colors.transparent,
-
+      fillColor: colorAssetData(context, ColorEnum.primaryColor),
       messageBarHintStyle: TextStyle(
-        color: colorAssetData(context, ColorEnum.primaryColor).withOpacity(0.5),
+        color:
+            colorAssetData(context, ColorEnum.secondaryColor).withOpacity(0.5),
         fontSize: 12,
       ),
       replyWidgetColor: colorAssetData(context, ColorEnum.primaryColor),

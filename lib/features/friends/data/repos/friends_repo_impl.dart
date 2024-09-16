@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_project/core/errors/failuer_error.dart';
 import 'package:new_project/core/utils/friends_collection_data.dart';
-import 'package:new_project/core/utils/messages_collection_data.dart';
+import 'package:new_project/core/utils/chats_collection_data.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
 import 'package:new_project/features/friends/data/repos/friends_repo.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
@@ -104,7 +104,7 @@ class FriendsRepoImpl extends FriendsRepo {
         .collection(FriendCollentionData.userFriendCollentionData);
 
     return friend
-        .orderBy(MessagesCollectionData.messagesPersonName, descending: true)
+        .orderBy(ChatsCollectionData.messagesPersonName, descending: true)
         .snapshots()
         .map((snapshot) {
       try {
@@ -118,18 +118,18 @@ class FriendsRepoImpl extends FriendsRepo {
       }
     });
   }
-  
+
   @override
   Stream<Either<Failure, List<PersonModel>>> getRequests() {
-     CollectionReference requests = FirebaseFirestore.instance
+    CollectionReference requests = FirebaseFirestore.instance
         .collection(UserCollectionData.userCollectionName)
         .doc(FirebaseAuth.instance.currentUser!.email)
         .collection(FriendCollentionData.friendCollectionName)
         .doc('${FirebaseAuth.instance.currentUser!.email} Friends')
         .collection(FriendCollentionData.userFriendRequestsCollectionData);
 
-   return requests
-        .orderBy(MessagesCollectionData.messagesPersonName, descending: true)
+    return requests
+        .orderBy(ChatsCollectionData.messagesPersonName, descending: true)
         .snapshots()
         .map((snapshot) {
       try {
@@ -142,6 +142,5 @@ class FriendsRepoImpl extends FriendsRepo {
         return left(FirebaseExceptionFailure(e.toString()));
       }
     });
-
   }
 }

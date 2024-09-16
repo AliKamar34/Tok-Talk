@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_project/core/errors/failuer_error.dart';
-import 'package:new_project/core/utils/messages_collection_data.dart';
+import 'package:new_project/core/utils/chats_collection_data.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
 import 'package:new_project/features/home/data/models/group_model.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
@@ -16,13 +16,13 @@ class HomeRepoImpl extends HomeRepo {
     CollectionReference chats = FirebaseFirestore.instance
         .collection(UserCollectionData.userCollectionName)
         .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection(MessagesCollectionData.messagesChatCollectionName);
+        .collection(ChatsCollectionData.messagesChatCollectionName);
 
     try {
       List<PersonModel> persons = [];
       chats
           .orderBy(
-            MessagesCollectionData.messagePersonLastTime,
+            ChatsCollectionData.messagePersonLastTime,
             descending: true,
           )
           .snapshots()
@@ -47,16 +47,16 @@ class HomeRepoImpl extends HomeRepo {
 
   @override
   Future<Either<Failure, List<GroupModel>>> getGroups() async {
-     CollectionReference chats = FirebaseFirestore.instance
+    CollectionReference chats = FirebaseFirestore.instance
         .collection(UserCollectionData.userCollectionName)
         .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection(MessagesCollectionData.messagesGroupCollectionName);
+        .collection(ChatsCollectionData.messagesGroupCollectionName);
 
     try {
       List<GroupModel> groups = [];
       chats
           .orderBy(
-            MessagesCollectionData.messagePersonLastTime,
+            ChatsCollectionData.messagePersonLastTime,
             descending: true,
           )
           .snapshots()
@@ -78,5 +78,4 @@ class HomeRepoImpl extends HomeRepo {
       return left(FirebaseExceptionFailure(e.toString()));
     }
   }
- 
 }

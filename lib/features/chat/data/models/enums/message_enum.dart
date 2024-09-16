@@ -1,0 +1,4 @@
+enum MessageEnum{
+  textMessage,
+  
+}

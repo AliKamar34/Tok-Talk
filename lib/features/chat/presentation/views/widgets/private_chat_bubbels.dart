@@ -1,4 +1,3 @@
-
 import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:flutter/material.dart';
 import 'package:new_project/core/utils/colors_data.dart';
@@ -31,7 +30,8 @@ class PrivateChatReseverBubbles extends StatelessWidget {
       color: colorAssetData(context, ColorEnum.primaryColor),
       tail: false,
       isSender: false,
-      textStyle: const TextStyle(color: Colors.white, fontSize: 16),
+      textStyle: TextStyle(
+          color: colorAssetData(context, ColorEnum.textColor), fontSize: 16),
     );
   }
 }
