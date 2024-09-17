@@ -18,11 +18,8 @@ class PrivateChatViewBody extends StatelessWidget {
           personModel: personModel,
         ),
         const Expanded(child: PrivateChatListViewMessages()),
-        BlocProvider(
-          create: (context) => PrivateChatCubit(ChatRepoImpl()),
-          child: PrivateChatTextFeild(
-            personModel: personModel,
-          ),
+        PrivateChatTextFeild(
+          personModel: personModel,
         ),
       ],
     );

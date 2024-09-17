@@ -11,5 +11,7 @@ abstract class ChatRepo {
     String receverPhoto,
     String receverName,
   );
-  Either<Failure, List<MessageModel>> getMessages({required String receverEmail});
+  // Either<Failure, List<MessageModel>> getMessages({required String receverEmail});
+  Stream<Either<Failure, List<MessageModel>>> getMessages({required String receverEmail});
+
 }
