@@ -15,7 +15,10 @@ class PrivateChatSenderBubbles extends StatelessWidget {
       sent: true,
       delivered: true,
       seen: true,
-      textStyle: const TextStyle(color: Colors.white, fontSize: 16),
+      textStyle: TextStyle(
+        color: colorAssetData(context, ColorEnum.textColor),
+        fontSize: 16,
+      ),
     );
   }
 }
@@ -31,7 +34,9 @@ class PrivateChatReseverBubbles extends StatelessWidget {
       tail: false,
       isSender: false,
       textStyle: TextStyle(
-          color: colorAssetData(context, ColorEnum.textColor), fontSize: 16),
+        color: colorAssetData(context, ColorEnum.textColor),
+        fontSize: 16,
+      ),
     );
   }
 }

@@ -28,6 +28,7 @@ class HomeRepoImpl extends HomeRepo {
           .snapshots()
           .listen(
         (event) {
+          persons.clear();
           for (var docs in event.docs) {
             persons.add(PersonModel.fromjson(docs));
           }
@@ -62,6 +63,7 @@ class HomeRepoImpl extends HomeRepo {
           .snapshots()
           .listen(
         (event) {
+          groups.clear();
           for (var docs in event.docs) {
             groups.add(GroupModel.formJson(docs));
           }

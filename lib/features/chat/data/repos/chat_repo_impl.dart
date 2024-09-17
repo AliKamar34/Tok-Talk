@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -46,25 +48,8 @@ class ChatRepoImpl extends ChatRepo {
         reseverChats.doc(FirebaseAuth.instance.currentUser!.email);
 
     try {
-      currUserMessages.add({
-        MessageCollectionData.message: message,
-        MessageCollectionData.messageType: messageEnum,
-        MessageCollectionData.messageTime: DateTime.now(),
-        MessageCollectionData.senderEmail:
-            FirebaseAuth.instance.currentUser!.email,
-        MessageCollectionData.receverEmail: receverEmail,
-      });
-
-      reseverMessages.add({
-        MessageCollectionData.message: message,
-        MessageCollectionData.messageType: messageEnum,
-        MessageCollectionData.messageTime: DateTime.now(),
-        MessageCollectionData.senderEmail:
-            FirebaseAuth.instance.currentUser!.email,
-        MessageCollectionData.receverEmail: receverEmail,
-      });
-
-      receverInfo.set({
+      
+        receverInfo.set({
         ChatsCollectionData.messagePersonLastTime: DateTime.now(),
         ChatsCollectionData.messagesPersonImage: receverPhoto,
         ChatsCollectionData.messagesPersonName: receverName,
@@ -80,8 +65,30 @@ class ChatRepoImpl extends ChatRepo {
         ChatsCollectionData.messagesPersonEmail:
             FirebaseAuth.instance.currentUser!.email,
       });
+      
+      currUserMessages.add({
+        MessageCollectionData.message: message,
+        MessageCollectionData.messageType: messageEnum.name.toString(),
+        MessageCollectionData.messageTime: DateTime.now(),
+        MessageCollectionData.senderEmail:
+            FirebaseAuth.instance.currentUser!.email,
+        MessageCollectionData.receverEmail: receverEmail,
+      });
+
+      reseverMessages.add({
+        MessageCollectionData.message: message,
+        MessageCollectionData.messageType: messageEnum.name.toString(),
+        MessageCollectionData.messageTime: DateTime.now(),
+        MessageCollectionData.senderEmail:
+            FirebaseAuth.instance.currentUser!.email,
+        MessageCollectionData.receverEmail: receverEmail,
+      });
+
+    
+      log(currUserInfo.toString());
       return right(null);
     } catch (e) {
+      log(e.toString());
       return left(FirebaseExceptionFailure(e.toString()));
     }
   }
