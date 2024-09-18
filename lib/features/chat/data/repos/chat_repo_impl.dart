@@ -3,13 +3,11 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:new_project/core/errors/failuer_error.dart';
 import 'package:new_project/core/utils/chats_collection_data.dart';
 import 'package:new_project/core/utils/message_collection_data.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
 import 'package:new_project/features/chat/data/models/enums/message_enum.dart';
-import 'package:new_project/features/chat/data/models/message_model.dart';
 import 'package:new_project/features/chat/data/repos/chat_repo.dart';
 
 class ChatRepoImpl extends ChatRepo {
@@ -91,49 +89,5 @@ class ChatRepoImpl extends ChatRepo {
       log(e.toString());
       return left(FirebaseExceptionFailure(e.toString()));
     }
-  }
-
-  @override
-  Stream<Either<Failure, List<MessageModel>>> getMessages(
-      {required String receverEmail}) {
-    CollectionReference currUserMessages = FirebaseFirestore.instance
-        .collection(UserCollectionData.userCollectionName)
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection(ChatsCollectionData.messagesChatCollectionName)
-        .doc(receverEmail)
-        .collection(ChatsCollectionData.messagesMessagesCollectionName);
-
-    return currUserMessages
-        .orderBy(MessageCollectionData.messageTime, descending: false)
-        .snapshots()
-        .map((snapShot) {
-      try {
-        List<MessageModel> messages =
-            snapShot.docs.map((doc) => MessageModel.fromJson(doc)).toList();
-        return right(messages);
-      } catch (e) {
-        return left(FirebaseExceptionFailure(e.toString()));
-      }
-    });
-    // try {
-    //   List<MessageModel> messages = [];
-    //   currUserMessages
-    //       .orderBy(MessageCollectionData.messageTime, descending: false)
-    //       .snapshots()
-    //       .listen((event)  async {
-    //     messages.clear();
-    //     for (var doc in event.docs) {
-    //       log(event.docs.toString());
-    //       log('event before add it into list');
-    //       messages.add(MessageModel.fromJson(doc));
-    //       log('messages =  ${messages.toString()}');
-    //     }
-    //   });
-    //   log('messages length from repo ${messages.length.toString()}');
-
-    //   return right(messages);
-    // } catch (e) {
-    //   return left(FirebaseExceptionFailure(e.toString()));
-    // }
   }
 }

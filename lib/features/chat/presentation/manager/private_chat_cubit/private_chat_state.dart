@@ -15,6 +15,9 @@ final class PrivateChatSuccess extends PrivateChatState {
   final List<MessageModel> messages;
 
   const PrivateChatSuccess({required this.messages});
+
+   @override
+  List<Object> get props => [messages];
 }
 
 final class PrivateChatFailure extends PrivateChatState {
