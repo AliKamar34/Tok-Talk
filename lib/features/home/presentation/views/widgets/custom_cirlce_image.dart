@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:new_project/core/utils/assets_data.dart';
 
 class CustomCircleImage extends StatelessWidget {
   const CustomCircleImage({
@@ -17,7 +18,7 @@ class CustomCircleImage extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: imageUrl,
               placeholder: (context, url) => const CircularProgressIndicator(),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+              errorWidget: (context, url, error) => Image.asset(AssetsData.defultProfilePic),
             )),
       ),
     );

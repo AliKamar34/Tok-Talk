@@ -15,18 +15,22 @@ class PrivateChatListViewMessages extends StatelessWidget {
     return BlocBuilder<PrivateChatCubit, PrivateChatState>(
       builder: (context, state) {
         if (state is PrivateChatSuccess) {
-         log('messages length from listView ${state.messages.length.toString()}' );
+          log('messages length from listView ${state.messages.length.toString()}');
           return ListView.builder(
+            reverse: true,
             itemCount: state.messages.length,
             itemBuilder: ((context, index) {
-              if (state.messages[index].senderEmail ==
+              if (state.messages[state.messages.length - (index + 1)]
+                      .senderEmail ==
                   FirebaseAuth.instance.currentUser!.email) {
                 return PrivateChatSenderBubbles(
-                  message: state.messages[index].message,
+                  message: state
+                      .messages[state.messages.length - (index + 1)].message,
                 );
               } else {
                 return PrivateChatReseverBubbles(
-                  message: state.messages[index].message,
+                  message: state
+                      .messages[state.messages.length - (index + 1)].message,
                 );
               }
             }),
