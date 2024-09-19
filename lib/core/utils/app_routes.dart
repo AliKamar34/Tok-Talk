@@ -90,7 +90,9 @@ abstract class AppRoutes {
       GoRoute(
         path: kProfileView,
         builder: (BuildContext context, GoRouterState state) {
-          return const ProfileView();
+          return  ProfileView(
+            personModel: state.extra as PersonModel,
+          );
         },
       ),
       GoRoute(

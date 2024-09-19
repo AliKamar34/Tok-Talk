@@ -10,13 +10,16 @@ import 'package:new_project/features/settings/data/models/enums/colors_enums.dar
 
 class CustomFriendInfoButton extends StatelessWidget {
   const CustomFriendInfoButton(
-      {super.key, required this.personModel, this.onPressed});
+      {super.key, required this.personModel,});
   final PersonModel personModel;
-  final void Function()? onPressed;
+
   @override
   Widget build(BuildContext context) {
     return CustomBackgoundContainer(
-      onPressed: onPressed, // go to profile
+      onPressed:  () {
+              GoRouter.of(context).push(AppRoutes.kProfileView, extra: personModel);
+          
+            }, // go to profile
       child: ListTile(
           contentPadding: EdgeInsets.zero,
           leading: CustomCircleImage(

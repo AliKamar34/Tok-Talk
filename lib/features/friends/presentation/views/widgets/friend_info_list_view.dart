@@ -12,9 +12,7 @@ class FriendInfoListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<FriendsCubit, FriendsState>(
-      listener: (context, state) {
-        
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         if (state is FriendsSuccess) {
           log(state.friends.length.toString());
@@ -29,7 +27,6 @@ class FriendInfoListView extends StatelessWidget {
                   name: state.friends[index].name,
                   image: state.friends[index].image,
                 ),
-                onPressed: () {},
               );
             },
           );
