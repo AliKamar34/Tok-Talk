@@ -94,53 +94,53 @@ class FriendsRepoImpl extends FriendsRepo {
     }
   }
 
-  @override
-  Stream<Either<Failure, List<PersonModel>>> getFriends() {
-    CollectionReference friend = FirebaseFirestore.instance
-        .collection(UserCollectionData.userCollectionName)
-        .doc(FirebaseAuth.instance.currentUser!.email!)
-        .collection(FriendCollentionData.friendCollectionName)
-        .doc('${FirebaseAuth.instance.currentUser!.email!} Friends')
-        .collection(FriendCollentionData.userFriendCollentionData);
+  // @override
+  // Stream<Either<Failure, List<PersonModel>>> getFriends() {
+  //   CollectionReference friend = FirebaseFirestore.instance
+  //       .collection(UserCollectionData.userCollectionName)
+  //       .doc(FirebaseAuth.instance.currentUser!.email!)
+  //       .collection(FriendCollentionData.friendCollectionName)
+  //       .doc('${FirebaseAuth.instance.currentUser!.email!} Friends')
+  //       .collection(FriendCollentionData.userFriendCollentionData);
 
-    return friend
-        .orderBy(ChatsCollectionData.messagesPersonName, descending: true)
-        .snapshots()
-        .map((snapshot) {
-      try {
-        List<PersonModel> friends =
-            snapshot.docs.map((doc) => PersonModel.fromjson(doc)).toList();
-        log(friends.length.toString());
-        log('message from friends repo ');
-        return right(friends);
-      } catch (e) {
-        return left(FirebaseExceptionFailure(e.toString()));
-      }
-    });
-  }
+  //   return friend
+  //       .orderBy(ChatsCollectionData.messagesPersonName, descending: true)
+  //       .snapshots()
+  //       .map((snapshot) {
+  //     try {
+  //       List<PersonModel> friends =
+  //           snapshot.docs.map((doc) => PersonModel.fromjson(doc)).toList();
+  //       log(friends.length.toString());
+  //       log('message from friends repo ');
+  //       return right(friends);
+  //     } catch (e) {
+  //       return left(FirebaseExceptionFailure(e.toString()));
+  //     }
+  //   });
+  // }
 
-  @override
-  Stream<Either<Failure, List<PersonModel>>> getRequests() {
-    CollectionReference requests = FirebaseFirestore.instance
-        .collection(UserCollectionData.userCollectionName)
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection(FriendCollentionData.friendCollectionName)
-        .doc('${FirebaseAuth.instance.currentUser!.email} Friends')
-        .collection(FriendCollentionData.userFriendRequestsCollectionData);
+  // @override
+  // Stream<Either<Failure, List<PersonModel>>> getRequests() {
+  //   CollectionReference requests = FirebaseFirestore.instance
+  //       .collection(UserCollectionData.userCollectionName)
+  //       .doc(FirebaseAuth.instance.currentUser!.email)
+  //       .collection(FriendCollentionData.friendCollectionName)
+  //       .doc('${FirebaseAuth.instance.currentUser!.email} Friends')
+  //       .collection(FriendCollentionData.userFriendRequestsCollectionData);
 
-    return requests
-        .orderBy(ChatsCollectionData.messagesPersonName, descending: true)
-        .snapshots()
-        .map((snapshot) {
-      try {
-        List<PersonModel> requestsList =
-            snapshot.docs.map((doc) => PersonModel.fromjson(doc)).toList();
-        log(requestsList.length.toString());
-        log('message from friends repo ');
-        return right(requestsList);
-      } catch (e) {
-        return left(FirebaseExceptionFailure(e.toString()));
-      }
-    });
-  }
+  //   return requests
+  //       .orderBy(ChatsCollectionData.messagesPersonName, descending: true)
+  //       .snapshots()
+  //       .map((snapshot) {
+  //     try {
+  //       List<PersonModel> requestsList =
+  //           snapshot.docs.map((doc) => PersonModel.fromjson(doc)).toList();
+  //       log(requestsList.length.toString());
+  //       log('message from friends repo ');
+  //       return right(requestsList);
+  //     } catch (e) {
+  //       return left(FirebaseExceptionFailure(e.toString()));
+  //     }
+  //   });
+  // }
 }

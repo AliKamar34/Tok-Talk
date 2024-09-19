@@ -15,6 +15,9 @@ final class FriendsSuccess extends FriendsState {
   final List<PersonModel> friends;
 
   const FriendsSuccess({required this.friends});
+
+    @override
+  List<Object> get props => [friends];
 }
 
 final class FriendsFailuer extends FriendsState {

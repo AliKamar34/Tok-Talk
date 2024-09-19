@@ -16,6 +16,9 @@ final class RequestsSuccess extends RequestsState {
 
   const RequestsSuccess({required this.requests});
 
+     @override
+  List<Object> get props => [requests];
+
 }
 
 final class RequestsFailuer extends RequestsState {
