@@ -18,18 +18,18 @@ class ChatsInfoListView extends StatelessWidget {
       builder: (context, state) {
         if (state is ChatsSuccess) {
           log('data from bloc builder');
-          log(state.persons.toString());
-          log(state.persons.length.toString());
+          log(state.chats.toString());
+          log(state.chats.length.toString());
 
           return ListView.builder(
-            itemCount: state.persons.length,
+            itemCount: state.chats.length,
             itemBuilder: (context, index) {
               return CustomChatInfoButton(
-                personModel: state.persons[index],
+                chatModel: state.chats[index],
                 onPressed: () {
                   GoRouter.of(context).push(
                     AppRoutes.kPrivateChateView,
-                    extra: state.persons[index],
+                    extra: state.chats[index].personModel,
                   );
                 },
               );

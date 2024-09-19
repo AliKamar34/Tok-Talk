@@ -1,5 +1,4 @@
-import 'dart:async';
-import 'dart:developer';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -9,7 +8,7 @@ import 'package:new_project/core/utils/chats_collection_data.dart';
 import 'package:new_project/core/utils/friends_collection_data.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
 import 'package:new_project/features/friends/data/repos/friends_repo.dart';
-import 'package:new_project/features/home/data/models/person_model.dart';
+import 'package:new_project/core/models/person_model.dart';
 part 'friends_state.dart';
 
 class FriendsCubit extends Cubit<FriendsState> {

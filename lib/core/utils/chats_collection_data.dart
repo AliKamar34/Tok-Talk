@@ -4,6 +4,7 @@ class ChatsCollectionData {
   static const messagesFriendsCollectionName = 'friends';
   static const messagesMessagesCollectionName = 'messages';
 
+  static const messagePerronLastMessage = 'lastMessage';
   static const messagesPersonEmail = 'email';
   static const messagesPersonName = 'name';
   static const messagesPersonImage = 'ulrUserPhoto';

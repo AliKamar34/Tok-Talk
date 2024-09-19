@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:new_project/core/errors/failuer_error.dart';
+import 'package:new_project/core/models/person_model.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
-import 'package:new_project/features/home/data/models/person_model.dart';
 import 'package:new_project/features/search/data/repos/search_repo.dart';
 
 class SearchRepoImpl extends SearchRepo {

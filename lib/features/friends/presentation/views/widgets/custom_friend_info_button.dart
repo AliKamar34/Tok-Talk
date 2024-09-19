@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:new_project/core/models/person_model.dart';
 import 'package:new_project/core/utils/app_routes.dart';
 import 'package:new_project/core/utils/colors_data.dart';
 import 'package:new_project/core/widgets/custom_backgtound_container.dart';
 import 'package:new_project/core/widgets/custom_elevated_button.dart';
-import 'package:new_project/features/home/data/models/person_model.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
 import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 

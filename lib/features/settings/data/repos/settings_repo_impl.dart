@@ -9,10 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:new_project/core/errors/failuer_error.dart';
+import 'package:new_project/core/models/person_model.dart';
 import 'package:new_project/core/utils/app_routes.dart';
 import 'package:new_project/core/utils/friends_collection_data.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
-import 'package:new_project/features/home/data/models/person_model.dart';
 import 'package:new_project/features/settings/data/repos/settings_repo.dart';
 import 'package:path/path.dart';
 

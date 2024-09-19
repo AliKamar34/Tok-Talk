@@ -1,5 +1,5 @@
+import 'package:new_project/core/models/person_model.dart';
 import 'package:new_project/core/utils/chats_collection_data.dart';
-import 'package:new_project/features/home/data/models/person_model.dart';
 
 class GroupModel {
   final String name;

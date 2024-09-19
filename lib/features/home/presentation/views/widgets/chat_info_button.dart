@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:new_project/core/service/date_format_service.dart';
 import 'package:new_project/core/widgets/custom_backgtound_container.dart';
-import 'package:new_project/features/home/data/models/person_model.dart';
+import 'package:new_project/features/home/data/models/chat_model.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
 import 'package:new_project/features/home/presentation/views/widgets/message_counter.dart';
 
@@ -8,29 +10,32 @@ class CustomChatInfoButton extends StatelessWidget {
   const CustomChatInfoButton({
     super.key,
     required this.onPressed,
-    required this.personModel,
+    required this.chatModel,
   });
-  final PersonModel personModel;
+  final ChatModel chatModel;
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
+    String formattedTime = DateFormat('h:mm a').format(chatModel.date);
+    String formattedDays = getFormattedDate(chatModel.date);
     return CustomBackgoundContainer(
       onPressed: onPressed,
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: CustomCircleImage(
-          imageUrl: personModel.image,
+          imageUrl: chatModel.personModel.image,
         ),
         title: Text(
-          personModel.name,
+          chatModel.personModel.name,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: Text(personModel.email),
-        trailing: const Column(
+        subtitle: Text(chatModel.message),
+        trailing: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('today'),
-            MessageCounter(),
+            Text(formattedDays == 'Today' ? '' : formattedDays),
+            Text(formattedTime),
+            const MessageCounter(),
           ],
         ),
       ),

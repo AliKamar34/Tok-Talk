@@ -5,7 +5,7 @@ import 'package:new_project/core/widgets/custom_backgtound_container.dart';
 import 'package:new_project/core/widgets/custom_elevated_button.dart';
 import 'package:new_project/core/widgets/custom_snack_bar.dart';
 import 'package:new_project/features/friends/presentation/manager/requests_cubit/requests_cubit.dart';
-import 'package:new_project/features/home/data/models/person_model.dart';
+import 'package:new_project/core/models/person_model.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
 import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 

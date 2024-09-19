@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_project/features/home/data/models/person_model.dart';
+import 'package:new_project/core/models/person_model.dart';
 import 'package:new_project/features/search/data/repos/search_repo.dart';
 part 'search_state.dart';
 

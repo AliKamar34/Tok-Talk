@@ -12,12 +12,12 @@ final class ChatsInitial extends ChatsState {}
 final class ChatsLoading extends ChatsState {}
 
 final class ChatsSuccess extends ChatsState {
-  final List<PersonModel> persons;
+  final List<ChatModel> chats;
 
-  const ChatsSuccess({required this.persons});
+  const ChatsSuccess({required this.chats});
   
   @override
-  List<Object> get props => [persons];
+  List<Object> get props => [chats];
 }
 
 final class ChatsFailuer extends ChatsState {

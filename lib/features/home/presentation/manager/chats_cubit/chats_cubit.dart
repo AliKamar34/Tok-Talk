@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/core/utils/chats_collection_data.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
-import 'package:new_project/features/home/data/models/person_model.dart';
+import 'package:new_project/features/home/data/models/chat_model.dart';
 
 part 'chats_state.dart';
 
@@ -39,9 +39,9 @@ class ChatsCubit extends Cubit<ChatsState> {
           .snapshots()
           .listen(
         (event) {
-          List<PersonModel> persons =
-              event.docs.map((doc) => PersonModel.fromjson(doc)).toList();
-          emit(ChatsSuccess(persons: persons));
+          List<ChatModel> chats =
+              event.docs.map((doc) => ChatModel.fromjson(doc)).toList();
+          emit(ChatsSuccess(chats: chats));
         },
       );
     } catch (e) {

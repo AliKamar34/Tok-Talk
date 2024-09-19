@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_project/features/home/data/models/person_model.dart';
+import 'package:new_project/core/models/person_model.dart';
+import 'package:new_project/features/home/data/models/chat_model.dart';
 import 'package:new_project/features/home/presentation/manager/groups_cubit/groups_cubit.dart';
 import 'package:new_project/features/home/presentation/views/widgets/chat_info_button.dart';
 
@@ -17,12 +18,15 @@ class GroupsListView extends StatelessWidget {
             itemBuilder: (context, index) {
               return CustomChatInfoButton(
                 onPressed: () {},
-                personModel: PersonModel(
-                  email: 'ali@gmail.com',
-                  name: 'ali',
-                  image:
-                      'https://en.m.wikipedia.org/wiki/File:Sample_User_Icon.png',
-                ),
+                chatModel: ChatModel(
+                    message: '',
+                    date: DateTime.now(),
+                    personModel: PersonModel(
+                      email: 'ali@gmail.com',
+                      name: 'ali',
+                      image:
+                          'https://en.m.wikipedia.org/wiki/File:Sample_User_Icon.png',
+                    )),
               );
             },
           );
