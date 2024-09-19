@@ -15,6 +15,9 @@ final class GroupsSuccess extends GroupsState {
   final List<GroupModel> groups;
 
   const GroupsSuccess({required this.groups});
+
+    @override
+  List<Object> get props => [groups];
 }
 
 final class GroupsFailuer extends GroupsState {

@@ -15,6 +15,9 @@ final class ChatsSuccess extends ChatsState {
   final List<PersonModel> persons;
 
   const ChatsSuccess({required this.persons});
+  
+  @override
+  List<Object> get props => [persons];
 }
 
 final class ChatsFailuer extends ChatsState {

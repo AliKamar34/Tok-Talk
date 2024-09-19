@@ -6,7 +6,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:new_project/core/utils/contant.dart';
 import 'package:new_project/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:new_project/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
-import 'package:new_project/features/home/data/repos/home_repo_impl.dart';
 import 'package:new_project/features/home/presentation/manager/chats_cubit/chats_cubit.dart';
 import 'package:new_project/features/home/presentation/manager/groups_cubit/groups_cubit.dart';
 import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
@@ -41,12 +40,12 @@ class ChatGramApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ChatsCubit(
-            HomeRepoImpl(),
+            
           )..getChats(),
         ),
         BlocProvider(
           create: (context) => GroupsCubit(
-            HomeRepoImpl(),
+            
           )..getGroups(),
         ),
         BlocProvider(

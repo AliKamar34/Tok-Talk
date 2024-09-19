@@ -9,9 +9,6 @@ import 'package:new_project/features/friends/data/repos/friends_repo_impl.dart';
 import 'package:new_project/features/friends/presentation/manager/requests_cubit/requests_cubit.dart';
 import 'package:new_project/features/friends/presentation/views/requests_view.dart';
 import 'package:new_project/features/home/data/models/person_model.dart';
-import 'package:new_project/features/home/data/repos/home_repo_impl.dart';
-import 'package:new_project/features/home/presentation/manager/chats_cubit/chats_cubit.dart';
-import 'package:new_project/features/home/presentation/manager/groups_cubit/groups_cubit.dart';
 import 'package:new_project/features/home/presentation/views/groups_chats_view.dart';
 import 'package:new_project/features/home/presentation/views/home_view.dart';
 import 'package:new_project/features/home/presentation/views/chats_view.dart';
@@ -56,19 +53,13 @@ abstract class AppRoutes {
       GoRoute(
         path: kChatsView,
         builder: (BuildContext context, GoRouterState state) {
-          return BlocProvider(
-            create: (context) => ChatsCubit(HomeRepoImpl())..getChats(),
-            child: const ChatsView(),
-          );
+          return const ChatsView();
         },
       ),
         GoRoute(
         path: kGroupsView,
         builder: (BuildContext context, GoRouterState state) {
-          return BlocProvider(
-            create: (context) => GroupsCubit(HomeRepoImpl())..getGroups(),
-            child: const GroupsChatsView(),
-          );
+          return const GroupsChatsView();
         },
       ),
       GoRoute(

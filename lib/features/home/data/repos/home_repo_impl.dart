@@ -1,83 +1,83 @@
-import 'dart:developer';
+// import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:new_project/core/errors/failuer_error.dart';
-import 'package:new_project/core/utils/chats_collection_data.dart';
-import 'package:new_project/core/utils/user_collection_data.dart';
-import 'package:new_project/features/home/data/models/group_model.dart';
-import 'package:new_project/features/home/data/models/person_model.dart';
-import 'package:new_project/features/home/data/repos/home_repo.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:dartz/dartz.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:new_project/core/errors/failuer_error.dart';
+// import 'package:new_project/core/utils/chats_collection_data.dart';
+// import 'package:new_project/core/utils/user_collection_data.dart';
+// import 'package:new_project/features/home/data/models/group_model.dart';
+// import 'package:new_project/features/home/data/models/person_model.dart';
+// import 'package:new_project/features/home/data/repos/home_repo.dart';
 
-class HomeRepoImpl extends HomeRepo {
-  @override
-  Future<Either<Failure, List<PersonModel>>> getChats() async {
-    CollectionReference chats = FirebaseFirestore.instance
-        .collection(UserCollectionData.userCollectionName)
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection(ChatsCollectionData.messagesChatCollectionName);
+// class HomeRepoImpl extends HomeRepo {
+//   @override
+//   Future<Either<Failure, List<PersonModel>>> getChats() async {
+//     CollectionReference chats = FirebaseFirestore.instance
+//         .collection(UserCollectionData.userCollectionName)
+//         .doc(FirebaseAuth.instance.currentUser!.email)
+//         .collection(ChatsCollectionData.messagesChatCollectionName);
 
-    try {
-      List<PersonModel> persons = [];
-      chats
-          .orderBy(
-            ChatsCollectionData.messagePersonLastTime,
-            descending: true,
-          )
-          .snapshots()
-          .listen(
-        (event) {
-          persons.clear();
-          for (var docs in event.docs) {
-            persons.add(PersonModel.fromjson(docs));
-          }
-          log('data form home repo');
-          log(persons.length.toString());
-          log(persons.toString());
+//     try {
+//       List<PersonModel> persons = [];
+//       chats
+//           .orderBy(
+//             ChatsCollectionData.messagePersonLastTime,
+//             descending: true,
+//           )
+//           .snapshots()
+//           .listen(
+//         (event) {
+//           persons.clear();
+//           for (var docs in event.docs) {
+//             persons.add(PersonModel.fromjson(docs));
+//           }
+//           log('data form home repo');
+//           log(persons.length.toString());
+//           log(persons.toString());
 
-          log(event.docs.toString());
-          log(FirebaseAuth.instance.currentUser!.email.toString());
-        },
-      );
-      return right(persons);
-    } catch (e) {
-      return left(FirebaseExceptionFailure(e.toString()));
-    }
-  }
+//           log(event.docs.toString());
+//           log(FirebaseAuth.instance.currentUser!.email.toString());
+//         },
+//       );
+//       return right(persons);
+//     } catch (e) {
+//       return left(FirebaseExceptionFailure(e.toString()));
+//     }
+//   }
 
-  @override
-  Future<Either<Failure, List<GroupModel>>> getGroups() async {
-    CollectionReference chats = FirebaseFirestore.instance
-        .collection(UserCollectionData.userCollectionName)
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection(ChatsCollectionData.messagesGroupCollectionName);
+//   @override
+//   Future<Either<Failure, List<GroupModel>>> getGroups() async {
+//     CollectionReference chats = FirebaseFirestore.instance
+//         .collection(UserCollectionData.userCollectionName)
+//         .doc(FirebaseAuth.instance.currentUser!.email)
+//         .collection(ChatsCollectionData.messagesGroupCollectionName);
 
-    try {
-      List<GroupModel> groups = [];
-      chats
-          .orderBy(
-            ChatsCollectionData.messagePersonLastTime,
-            descending: true,
-          )
-          .snapshots()
-          .listen(
-        (event) {
-          groups.clear();
-          for (var docs in event.docs) {
-            groups.add(GroupModel.formJson(docs));
-          }
-          log('data form home repo');
-          log(groups.length.toString());
-          log(groups.toString());
+//     try {
+//       List<GroupModel> groups = [];
+//       chats
+//           .orderBy(
+//             ChatsCollectionData.messagePersonLastTime,
+//             descending: true,
+//           )
+//           .snapshots()
+//           .listen(
+//         (event) {
+//           groups.clear();
+//           for (var docs in event.docs) {
+//             groups.add(GroupModel.formJson(docs));
+//           }
+//           log('data form home repo');
+//           log(groups.length.toString());
+//           log(groups.toString());
 
-          log(event.docs.toString());
-          log(FirebaseAuth.instance.currentUser!.email.toString());
-        },
-      );
-      return right(groups);
-    } catch (e) {
-      return left(FirebaseExceptionFailure(e.toString()));
-    }
-  }
-}
+//           log(event.docs.toString());
+//           log(FirebaseAuth.instance.currentUser!.email.toString());
+//         },
+//       );
+//       return right(groups);
+//     } catch (e) {
+//       return left(FirebaseExceptionFailure(e.toString()));
+//     }
+//   }
+// }
