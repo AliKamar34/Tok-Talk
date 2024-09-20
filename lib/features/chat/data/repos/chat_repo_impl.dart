@@ -1,14 +1,18 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:new_project/core/errors/failuer_error.dart';
 import 'package:new_project/core/utils/chats_collection_data.dart';
 import 'package:new_project/core/utils/message_collection_data.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
 import 'package:new_project/features/chat/data/models/enums/message_enum.dart';
 import 'package:new_project/features/chat/data/repos/chat_repo.dart';
+import 'package:path/path.dart';
 
 class ChatRepoImpl extends ChatRepo {
   @override
@@ -53,7 +57,7 @@ class ChatRepoImpl extends ChatRepo {
         ChatsCollectionData.messagesPersonImage: receverPhoto,
         ChatsCollectionData.messagesPersonName: receverName,
         ChatsCollectionData.messagesPersonEmail: receverEmail,
-      ChatsCollectionData.messagePerronLastMessage: message,
+        ChatsCollectionData.messagePerronLastMessage: message,
       });
 
       currUserInfo.set({
@@ -64,7 +68,7 @@ class ChatRepoImpl extends ChatRepo {
             FirebaseAuth.instance.currentUser!.displayName,
         ChatsCollectionData.messagesPersonEmail:
             FirebaseAuth.instance.currentUser!.email,
-          ChatsCollectionData.messagePerronLastMessage: message,
+        ChatsCollectionData.messagePerronLastMessage: message,
       });
 
       currUserMessages.add({
@@ -89,6 +93,42 @@ class ChatRepoImpl extends ChatRepo {
       return right(null);
     } catch (e) {
       log(e.toString());
+      return left(FirebaseExceptionFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> sendImage(
+    String receverEmail,
+    String receverPhoto,
+    String receverName,
+  ) async {
+    File? file;
+    String? url;
+
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? imageFromGallery =
+          await picker.pickImage(source: ImageSource.gallery);
+      if (imageFromGallery != null) {
+        file = File(imageFromGallery.path);
+        var imageName = basename(imageFromGallery.path);
+        var refStorage = FirebaseStorage.instance.ref(
+            '${FirebaseAuth.instance.currentUser!.email}/imageMessages/$imageName');
+        await refStorage.putFile(file);
+        url = await refStorage.getDownloadURL();
+        log('message');
+        log(url);
+      }
+      sendMessage(
+         url ?? '',
+        MessageEnum.imageMessage,
+        receverEmail,
+        receverPhoto,
+        receverName,
+      );
+      return right(null);
+    } catch (e) {
       return left(FirebaseExceptionFailure(e.toString()));
     }
   }

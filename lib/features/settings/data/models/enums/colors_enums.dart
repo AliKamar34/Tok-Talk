@@ -3,4 +3,5 @@ enum ColorEnum{
   primaryColor,
   secondaryColor,
   textColor,
+  iconColor,
 }

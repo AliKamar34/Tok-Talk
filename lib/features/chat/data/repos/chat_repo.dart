@@ -11,5 +11,7 @@ abstract class ChatRepo {
     String receverName,
   );
 
-
+  Future<Either<Failure, void>> sendImage(  String receverEmail,
+    String receverPhoto,
+    String receverName,);
 }

@@ -24,11 +24,17 @@ class PrivateChatListViewMessages extends StatelessWidget {
                       .senderEmail ==
                   FirebaseAuth.instance.currentUser!.email) {
                 return PrivateChatSenderBubbles(
+                  messageEnum: state
+                      .messages[state.messages.length - (index + 1)]
+                      .messageType,
                   message: state
                       .messages[state.messages.length - (index + 1)].message,
                 );
               } else {
                 return PrivateChatReseverBubbles(
+                  messageEnum: state
+                      .messages[state.messages.length - (index + 1)]
+                      .messageType,
                   message: state
                       .messages[state.messages.length - (index + 1)].message,
                 );

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:chat_bubbles/message_bars/message_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:new_project/core/models/person_model.dart';
 import 'package:new_project/core/utils/colors_data.dart';
 import 'package:new_project/features/chat/data/models/enums/message_enum.dart';
@@ -27,6 +28,14 @@ class PrivateChatTextFeild extends StatelessWidget {
               personModel.name,
             );
       }, // function to send message
+      onTextChanged: (_) {
+        
+      },
+      sendIcon: Icon(
+        FontAwesomeIcons.solidPaperPlane,
+        color: colorAssetData(context, ColorEnum.iconColor),
+        size: 22,
+      ),
       messageBarColor: Colors.transparent,
       fillColor: colorAssetData(context, ColorEnum.primaryColor),
       messageBarHintStyle: TextStyle(
@@ -37,14 +46,20 @@ class PrivateChatTextFeild extends StatelessWidget {
       replyWidgetColor: colorAssetData(context, ColorEnum.primaryColor),
       actions: [
         Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8),
+          padding: const EdgeInsets.only(left: 8, right: 15),
           child: InkWell(
             child: Icon(
-              Icons.camera_alt,
-              color: colorAssetData(context, ColorEnum.primaryColor),
+              FontAwesomeIcons.photoFilm,
+              color: colorAssetData(context, ColorEnum.iconColor),
               size: 24,
             ),
-            onTap: () {}, // function to send image
+            onTap: () {
+              BlocProvider.of<PrivateChatCubit>(context).chatRepo.sendImage(
+                    personModel.email,
+                    personModel.image,
+                    personModel.name,
+                  );
+            }, // function to send image
           ),
         ),
       ],

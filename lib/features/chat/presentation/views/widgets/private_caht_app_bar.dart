@@ -29,7 +29,10 @@ class PrivateChatAppBar extends StatelessWidget {
                 },
                 child: Row(
                   children: [
-                    const Icon(Icons.arrow_back_ios_new_rounded),
+                    Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      color: colorAssetData(context, ColorEnum.iconColor),
+                    ),
                     SizedBox(
                       height: 50,
                       child: CustomCircleImage(imageUrl: personModel.image),
