@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:new_project/core/models/person_model.dart';
 import 'package:new_project/core/utils/colors_data.dart';
 import 'package:new_project/features/chat/data/models/enums/message_enum.dart';
+import 'package:new_project/features/chat/presentation/manager/change_send_icon_cubit/change_send_icon_cubit.dart';
 import 'package:new_project/features/chat/presentation/manager/private_chat_cubit/private_chat_cubit.dart';
 import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 
@@ -28,13 +29,29 @@ class PrivateChatTextFeild extends StatelessWidget {
               personModel.name,
             );
       }, // function to send message
-      onTextChanged: (_) {
-        
+      onTextChanged: (text) {
+        if (text == '') {
+          BlocProvider.of<ChangeSendIconCubit>(context).changeIcon(true);
+        } else {
+          BlocProvider.of<ChangeSendIconCubit>(context).changeIcon(false);
+        }
       },
-      sendIcon: Icon(
-        FontAwesomeIcons.solidPaperPlane,
-        color: colorAssetData(context, ColorEnum.iconColor),
-        size: 22,
+      sendIcon: BlocBuilder<ChangeSendIconCubit, ChangeSendIconState>(
+        builder: (context, state) {
+          if (state is ChangeSendIconIText) {
+            return Icon(
+              FontAwesomeIcons.solidPaperPlane,
+              color: colorAssetData(context, ColorEnum.iconColor),
+              size: 22,
+            );
+          } else {
+            return Icon(
+              FontAwesomeIcons.microphone,
+              color: colorAssetData(context, ColorEnum.iconColor),
+              size: 22,
+            );
+          }
+        },
       ),
       messageBarColor: Colors.transparent,
       fillColor: colorAssetData(context, ColorEnum.primaryColor),
