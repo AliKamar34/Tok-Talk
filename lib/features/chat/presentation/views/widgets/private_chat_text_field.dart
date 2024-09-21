@@ -28,7 +28,9 @@ class PrivateChatTextFeild extends StatelessWidget {
               personModel.image,
               personModel.name,
             );
+        BlocProvider.of<ChangeSendIconCubit>(context).changeIcon(true);
       }, // function to send message
+     
       onTextChanged: (text) {
         if (text == '') {
           BlocProvider.of<ChangeSendIconCubit>(context).changeIcon(true);
@@ -45,10 +47,26 @@ class PrivateChatTextFeild extends StatelessWidget {
               size: 22,
             );
           } else {
-            return Icon(
-              FontAwesomeIcons.microphone,
-              color: colorAssetData(context, ColorEnum.iconColor),
-              size: 22,
+            return GestureDetector(
+              onLongPress: () {
+                BlocProvider.of<PrivateChatCubit>(context)
+                    .chatRepo
+                    .startRecording();
+                log('long press active');
+              },
+              onLongPressUp: () {
+                BlocProvider.of<PrivateChatCubit>(context).chatRepo.sendRecord(
+                      personModel.email,
+                      personModel.image,
+                      personModel.name,
+                    );
+                log('long press canceld');
+              },
+              child: Icon(
+                FontAwesomeIcons.microphone,
+                color: colorAssetData(context, ColorEnum.iconColor),
+                size: 22,
+              ),
             );
           }
         },

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +14,9 @@ import 'package:new_project/core/utils/user_collection_data.dart';
 import 'package:new_project/features/chat/data/models/enums/message_enum.dart';
 import 'package:new_project/features/chat/data/repos/chat_repo.dart';
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:record/record.dart';
+import 'package:uuid/uuid.dart';
 
 class ChatRepoImpl extends ChatRepo {
   @override
@@ -121,7 +125,7 @@ class ChatRepoImpl extends ChatRepo {
         log(url);
       }
       sendMessage(
-         url ?? '',
+        url ?? '',
         MessageEnum.imageMessage,
         receverEmail,
         receverPhoto,
@@ -131,5 +135,70 @@ class ChatRepoImpl extends ChatRepo {
     } catch (e) {
       return left(FirebaseExceptionFailure(e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failure, void>> sendRecord(
+    String receverEmail,
+    String receverPhoto,
+    String receverName,
+  ) async {
+    try {
+      path = await record.stop();
+      log('record stoped');
+      var refStorage = FirebaseStorage.instance.ref(
+          '${FirebaseAuth.instance.currentUser!.email}/recordMessages/$path');
+      await refStorage.putFile(File(path!));
+      url = await refStorage.getDownloadURL();
+      sendMessage(
+        url ?? '',
+        MessageEnum.recordMessage,
+        receverEmail,
+        receverPhoto,
+        receverName,
+      );
+      return right(null);
+    } catch (e) {
+      return left(FirebaseExceptionFailure(e.toString()));
+    }
+  }
+
+  String? path;
+  String? url;
+
+  final record = AudioRecorder();
+  @override
+  Future<Either<Failure, void>> startRecording() async {
+    try {
+      final location = await getApplicationDocumentsDirectory();
+      String name = const Uuid().v1();
+      if (await record.hasPermission()) {
+        await record.start(const RecordConfig(),
+            path: '${location.path}$name.m4a');
+      }
+      log('record started');
+      return right(null);
+    } catch (e) {
+      return left(FirebaseExceptionFailure(e.toString()));
+    }
+  }
+
+  AudioPlayer audioPlayer = AudioPlayer();
+  @override
+  playRecord(url) async {
+   
+      await audioPlayer.play(UrlSource(url));
+      log('audio played');
+      return true;
+    
+  }
+
+  @override
+  stopRecord() async {
+   
+      await audioPlayer.stop();
+      log('audio stoped');
+      return false;
+    
   }
 }

@@ -11,7 +11,19 @@ abstract class ChatRepo {
     String receverName,
   );
 
-  Future<Either<Failure, void>> sendImage(  String receverEmail,
+  Future<Either<Failure, void>> sendImage(
+    String receverEmail,
     String receverPhoto,
-    String receverName,);
+    String receverName,
+  );
+
+  Future<Either<Failure, void>> sendRecord(
+    String receverEmail,
+    String receverPhoto,
+    String receverName,
+  );
+  Future<Either<Failure, void>> startRecording();
+  playRecord(String url);
+   stopRecord();
+
 }
