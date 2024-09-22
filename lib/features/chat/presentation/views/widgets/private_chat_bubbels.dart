@@ -25,7 +25,10 @@ class PrivateChatSenderBubbles extends StatelessWidget {
             delivered: true,
           )
         : messageEnum == MessageEnum.recordMessage.name
-            ? AudioChatBubble(message: message)
+            ? AudioChatBubble(
+                message: message,
+                delivered: true,
+              )
             : BubbleSpecialThree(
                 text: message,
                 color: colorAssetData(context, ColorEnum.primaryColor),
@@ -40,7 +43,6 @@ class PrivateChatSenderBubbles extends StatelessWidget {
               );
   }
 }
-
 
 class PrivateChatReseverBubbles extends StatelessWidget {
   const PrivateChatReseverBubbles(
@@ -57,17 +59,20 @@ class PrivateChatReseverBubbles extends StatelessWidget {
             ),
             color: colorAssetData(context, ColorEnum.primaryColor),
           )
-       : messageEnum == MessageEnum.recordMessage.name
-            ? AudioChatBubble(message: message)
-        : BubbleSpecialThree(
-            text: message,
-            color: colorAssetData(context, ColorEnum.primaryColor),
-            tail: false,
-            isSender: false,
-            textStyle: TextStyle(
-              color: colorAssetData(context, ColorEnum.textColor),
-              fontSize: 16,
-            ),
-          );
+        : messageEnum == MessageEnum.recordMessage.name
+            ? AudioChatBubble(
+                message: message,
+                delivered: true,
+              )
+            : BubbleSpecialThree(
+                text: message,
+                color: colorAssetData(context, ColorEnum.primaryColor),
+                tail: false,
+                isSender: false,
+                textStyle: TextStyle(
+                  color: colorAssetData(context, ColorEnum.textColor),
+                  fontSize: 16,
+                ),
+              );
   }
 }
