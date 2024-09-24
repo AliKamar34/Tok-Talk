@@ -10,8 +10,8 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   Future<void> updateImage() async {
     emit(SettingsLoading());
-    var result = await settingsRepo.upLoadImage();
- result.fold((failuer) {
+    var result = await settingsRepo.upLoadProfileImage();
+    result.fold((failuer) {
       emit(SettingsFailuer(errMessage: failuer.errorMessage));
     }, (_) {
       emit(SettingsSuccess());

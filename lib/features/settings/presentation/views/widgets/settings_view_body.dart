@@ -1,12 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/core/widgets/custom_backgtound_container.dart';
-import 'package:new_project/core/widgets/custom_loading_indicator.dart';
-import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
 import 'package:new_project/features/settings/presentation/manager/setting_cubit/settings_cubit.dart';
+import 'package:new_project/features/settings/presentation/views/widgets/change_profile_image_buttom.dart';
 import 'package:new_project/features/settings/presentation/views/widgets/curr_user_info_container.dart';
 import 'package:new_project/features/settings/presentation/views/widgets/custom_switcher.dart';
+import 'package:new_project/features/settings/presentation/views/widgets/profile_image_section.dart';
 
 class SettingsViewBody extends StatelessWidget {
   const SettingsViewBody({super.key});
@@ -21,46 +20,16 @@ class SettingsViewBody extends StatelessWidget {
             height: MediaQuery.sizeOf(context).height,
             child: Column(
               children: [
-                Flexible(
+                const Flexible(
                   child: SizedBox(
                     width: 250,
-                    child: CustomCircleImage(
-                      imageUrl:
-                          FirebaseAuth.instance.currentUser!.photoURL ?? '',
-                    ),
+                    child: ProfileImageSection(),
                   ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                CustomBackgoundContainer(
-                  onPressed: () {
-                    BlocProvider.of<SettingsCubit>(context).updateImage();
-                  },
-                  child: BlocBuilder<SettingsCubit, SettingsState>(
-                    builder: (context, state) {
-                      if (state is SettingsLoading) {
-                        return const FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: SizedBox(
-                            height: 20,
-                            child: CustomLoadingIndicator(),
-                          ),
-                        );
-                      } else if (state is SettingsSuccess) {
-                        return const Padding(
-                          padding: EdgeInsets.all(12),
-                          child: Text('success'),
-                        );
-                      } else {
-                        return const Padding(
-                          padding: EdgeInsets.all(12),
-                          child: Text('Change Photo'),
-                        );
-                      }
-                    },
-                  ),
-                ),
+                const ChangeProfileImageButton(),
                 const CurrUserInfo(),
                 CustomBackgoundContainer(
                   onPressed: () {},
@@ -106,3 +75,6 @@ class SettingsViewBody extends StatelessWidget {
     );
   }
 }
+
+
+

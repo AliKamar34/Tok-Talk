@@ -9,11 +9,13 @@ import 'package:new_project/features/settings/data/models/enums/colors_enums.dar
 class AudioChatBubble extends StatefulWidget {
   const AudioChatBubble({
     super.key,
-    required this.message, required this.delivered,
+    required this.message,
+    required this.delivered, required this.isSender,
   });
 
   final String message;
   final bool delivered;
+  final bool isSender;
 
   @override
   State<AudioChatBubble> createState() => _AudioChatBubbleState();
@@ -79,6 +81,7 @@ class _AudioChatBubbleState extends State<AudioChatBubble> {
       position: position.inSeconds.toDouble(),
       isPlaying: isPlaying,
       isLoading: false,
+      isSender: widget.isSender,
       // isPause: isPause,
       onSeekChanged: (value) {
         Duration newPosition = Duration(seconds: value.toInt());

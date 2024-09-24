@@ -62,6 +62,7 @@ class ChatRepoImpl extends ChatRepo {
         ChatsCollectionData.messagesPersonName: receverName,
         ChatsCollectionData.messagesPersonEmail: receverEmail,
         ChatsCollectionData.messagePerronLastMessage: message,
+        MessageCollectionData.messageType: messageEnum.name,
       });
 
       currUserInfo.set({
@@ -73,6 +74,7 @@ class ChatRepoImpl extends ChatRepo {
         ChatsCollectionData.messagesPersonEmail:
             FirebaseAuth.instance.currentUser!.email,
         ChatsCollectionData.messagePerronLastMessage: message,
+         MessageCollectionData.messageType: messageEnum.name,
       });
 
       currUserMessages.add({

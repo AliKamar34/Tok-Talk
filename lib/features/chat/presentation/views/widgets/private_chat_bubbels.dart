@@ -28,6 +28,7 @@ class PrivateChatSenderBubbles extends StatelessWidget {
             ? AudioChatBubble(
                 message: message,
                 delivered: true,
+                isSender: true,
               )
             : BubbleSpecialThree(
                 text: message,
@@ -58,11 +59,13 @@ class PrivateChatReseverBubbles extends StatelessWidget {
               imageUrl: message,
             ),
             color: colorAssetData(context, ColorEnum.primaryColor),
+            isSender: false,
           )
         : messageEnum == MessageEnum.recordMessage.name
             ? AudioChatBubble(
                 message: message,
-                delivered: true,
+                delivered: false,
+                isSender: false,
               )
             : BubbleSpecialThree(
                 text: message,

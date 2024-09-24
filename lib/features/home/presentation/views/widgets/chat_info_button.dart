@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:new_project/core/service/date_format_service.dart';
 import 'package:new_project/core/widgets/custom_backgtound_container.dart';
+import 'package:new_project/features/chat/data/models/enums/message_enum.dart';
 import 'package:new_project/features/home/data/models/chat_model.dart';
 import 'package:new_project/features/home/presentation/views/widgets/custom_cirlce_image.dart';
 import 'package:new_project/features/home/presentation/views/widgets/message_counter.dart';
@@ -29,7 +30,11 @@ class CustomChatInfoButton extends StatelessWidget {
           chatModel.personModel.name,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: Text(chatModel.message),
+        subtitle: chatModel.messageType == MessageEnum.imageMessage.name
+            ? const Text('Image Message')
+            : chatModel.messageType == MessageEnum.recordMessage.name
+                ? const Text('Voice Message')
+                : Text(chatModel.message),
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

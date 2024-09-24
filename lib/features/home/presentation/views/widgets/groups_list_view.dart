@@ -19,6 +19,7 @@ class GroupsListView extends StatelessWidget {
               return CustomChatInfoButton(
                 onPressed: () {},
                 chatModel: ChatModel(
+                    messageType: 'text',
                     message: '',
                     date: DateTime.now(),
                     personModel: PersonModel(

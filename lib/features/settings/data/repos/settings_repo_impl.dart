@@ -11,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:new_project/core/errors/failuer_error.dart';
 import 'package:new_project/core/models/person_model.dart';
 import 'package:new_project/core/utils/app_routes.dart';
+import 'package:new_project/core/utils/chats_collection_data.dart';
 import 'package:new_project/core/utils/friends_collection_data.dart';
 import 'package:new_project/core/utils/user_collection_data.dart';
 import 'package:new_project/features/settings/data/repos/settings_repo.dart';
@@ -31,7 +32,7 @@ class SettingRepoImpl extends SettingsRepo {
   }
 
   @override
-  Future<Either<Failure, void>> upLoadImage() async {
+  Future<Either<Failure, void>> upLoadProfileImage() async {
     File? file;
     String? url;
 
@@ -62,6 +63,17 @@ class SettingRepoImpl extends SettingsRepo {
   }
 
   @override
+  Future<Either<Failure, void>> removeProfileImage() async {
+    try {
+      FirebaseAuth.instance.currentUser!.updatePhotoURL('No Image');
+      upDateData(dataType: UserCollectionData.userImage, data: 'No Image');
+      return const Right(null);
+    } catch (e) {
+      return Left(FirebaseExceptionFailure(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> upDateData(
       {required String dataType, String? data}) async {
     try {
@@ -80,11 +92,10 @@ class SettingRepoImpl extends SettingsRepo {
           .collection(FriendCollentionData.friendCollectionName)
           .doc('${FirebaseAuth.instance.currentUser!.email!} Friends')
           .collection(FriendCollentionData.userFriendCollentionData);
-     
+
       final snapshot = await userFriends.get();
       List<PersonModel> friends =
           snapshot.docs.map((doc) => PersonModel.fromjson(doc.data())).toList();
-      
 
       // loop in friends and updata user data for them
       for (var friend in friends) {
@@ -93,6 +104,13 @@ class SettingRepoImpl extends SettingsRepo {
             .collection(FriendCollentionData.friendCollectionName)
             .doc('${friend.email} Friends')
             .collection(FriendCollentionData.userFriendCollentionData)
+            .doc(FirebaseAuth.instance.currentUser!.email)
+            .update({dataType: data});
+      }
+      for (var friend in friends) {
+        userData
+            .doc(friend.email)
+            .collection(ChatsCollectionData.messagesChatCollectionName)
             .doc(FirebaseAuth.instance.currentUser!.email)
             .update({dataType: data});
       }
