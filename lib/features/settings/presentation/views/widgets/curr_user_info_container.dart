@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_project/features/settings/data/repos/settings_repo_impl.dart';
+import 'package:new_project/features/settings/presentation/manager/setting_cubit/settings_cubit.dart';
 import 'package:new_project/features/settings/presentation/views/widgets/custom_bottom_sheet.dart';
 import 'package:new_project/features/settings/presentation/views/widgets/custom_profile_info_container.dart';
 
@@ -18,7 +21,15 @@ class CurrUserInfo extends StatelessWidget {
           subTitle: FirebaseAuth.instance.currentUser!.displayName!,
           icon: Icons.account_circle,
           onPressed: () {
-            showBottomSheet(context);
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return BlocProvider(
+                  create: (context) => SettingsCubit(SettingRepoImpl()),
+                  child: const CustomBottomSheet(),
+                );
+              },
+            );
           },
         ),
         CustomProfileInfoContainer(
@@ -29,14 +40,4 @@ class CurrUserInfo extends StatelessWidget {
       ],
     );
   }
-
-  Future<dynamic> showBottomSheet(BuildContext context) {
-    return showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return const CustomBottomSheet();
-      },
-    );
-  }
 }
-

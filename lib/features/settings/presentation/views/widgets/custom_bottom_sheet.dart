@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_project/features/settings/presentation/manager/setting_cubit/settings_cubit.dart';
 
 class CustomBottomSheet extends StatelessWidget {
   const CustomBottomSheet({
@@ -8,6 +9,8 @@ class CustomBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController nameController = TextEditingController();
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       height: MediaQuery.sizeOf(context).height * 0.45,
@@ -19,20 +22,22 @@ class CustomBottomSheet extends StatelessWidget {
               children: [
                 const Text(
                   'Edit Name',
-                  style:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
                     labelText: 'Enter new name',
                   ),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    // هنا يمكنك تنفيذ العملية المطلوبة لتحديث الاسم
-                    Navigator.pop(context); // إغلاق الـ BottomSheet
+                    BlocProvider.of<SettingsCubit>(context)
+                        .settingsRepo
+                        .upDateUserName(name: nameController.text);
+                    Navigator.pop(context);
                   },
                   child: const Text('Save'),
                 ),

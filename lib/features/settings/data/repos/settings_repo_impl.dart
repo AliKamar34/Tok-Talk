@@ -72,6 +72,17 @@ class SettingRepoImpl extends SettingsRepo {
       return Left(FirebaseExceptionFailure(e.toString()));
     }
   }
+  
+  @override
+  Future<Either<Failure, void>> upDateUserName({required String name}) async {
+    try {
+      FirebaseAuth.instance.currentUser!.updateDisplayName(name);
+   upDateData(dataType: UserCollectionData.userName, data: name);
+      return const Right(null);
+    } catch (e) {
+      return Left(FirebaseExceptionFailure(e.toString()));
+    }
+  }
 
   @override
   Future<Either<Failure, void>> upDateData(
@@ -119,4 +130,5 @@ class SettingRepoImpl extends SettingsRepo {
       return Left(FirebaseExceptionFailure(e.toString()));
     }
   }
+
 }

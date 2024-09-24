@@ -8,4 +8,5 @@ abstract class SettingsRepo {
   Future<Either<Failure, void>> upDateData(
       {required String dataType, String? data});
   Future<Either<Failure, void>> removeProfileImage();
+  Future<Either<Failure, void>> upDateUserName({required String name});
 }
