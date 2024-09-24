@@ -14,7 +14,10 @@ Color colorAssetData(BuildContext context, ColorEnum colorType) {
         return Colors.white;
       case ColorEnum.iconColor:
         return const Color(0xffF4F4F4);
-
+      case ColorEnum.userMessageBubble:
+        return const Color(0xff424242);
+      case ColorEnum.friendMessageBubble:
+        return const Color(0xffD32F2F);
       default:
         return const Color(0xff161616);
     }
@@ -30,6 +33,10 @@ Color colorAssetData(BuildContext context, ColorEnum colorType) {
         return Colors.black;
       case ColorEnum.iconColor:
         return const Color(0xff4F772D);
+     case ColorEnum.userMessageBubble:
+        return const Color(0xffB7E4C7);
+      case ColorEnum.friendMessageBubble:
+        return const Color(0xffFFD6A5);
       default:
         return const Color(0xffE9EDC9);
     }

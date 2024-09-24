@@ -10,12 +10,14 @@ class AudioChatBubble extends StatefulWidget {
   const AudioChatBubble({
     super.key,
     required this.message,
-    required this.delivered, required this.isSender,
+    required this.delivered,
+    required this.isSender, required this.color,
   });
 
   final String message;
   final bool delivered;
   final bool isSender;
+  final Color color;
 
   @override
   State<AudioChatBubble> createState() => _AudioChatBubbleState();
@@ -76,7 +78,7 @@ class _AudioChatBubbleState extends State<AudioChatBubble> {
       fillColor: colorAssetData(context, ColorEnum.scaffoldColor),
       iconColor: colorAssetData(context, ColorEnum.iconColor),
       thumbColor: colorAssetData(context, ColorEnum.iconColor),
-      color: colorAssetData(context, ColorEnum.primaryColor),
+      color: widget.color,
       duration: duration.inSeconds.toDouble(),
       position: position.inSeconds.toDouble(),
       isPlaying: isPlaying,

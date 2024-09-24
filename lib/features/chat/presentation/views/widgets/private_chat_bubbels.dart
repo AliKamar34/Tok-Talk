@@ -21,22 +21,23 @@ class PrivateChatSenderBubbles extends StatelessWidget {
             image: CachedNetworkImage(
               imageUrl: message,
             ),
-            color: colorAssetData(context, ColorEnum.primaryColor),
-            delivered: true,
+            color: colorAssetData(context, ColorEnum.userMessageBubble),
+            delivered: false,
           )
         : messageEnum == MessageEnum.recordMessage.name
             ? AudioChatBubble(
                 message: message,
-                delivered: true,
+                delivered: false,
                 isSender: true,
+                color: colorAssetData(context, ColorEnum.userMessageBubble),
               )
             : BubbleSpecialThree(
                 text: message,
-                color: colorAssetData(context, ColorEnum.primaryColor),
+                color: colorAssetData(context, ColorEnum.userMessageBubble),
                 tail: false,
-                sent: true,
-                delivered: true,
-                seen: true,
+                sent: false,
+                delivered: false,
+                seen: false,
                 textStyle: TextStyle(
                   color: colorAssetData(context, ColorEnum.textColor),
                   fontSize: 16,
@@ -58,7 +59,7 @@ class PrivateChatReseverBubbles extends StatelessWidget {
             image: CachedNetworkImage(
               imageUrl: message,
             ),
-            color: colorAssetData(context, ColorEnum.primaryColor),
+            color: colorAssetData(context, ColorEnum.friendMessageBubble),
             isSender: false,
           )
         : messageEnum == MessageEnum.recordMessage.name
@@ -66,10 +67,11 @@ class PrivateChatReseverBubbles extends StatelessWidget {
                 message: message,
                 delivered: false,
                 isSender: false,
+                color: colorAssetData(context, ColorEnum.friendMessageBubble),
               )
             : BubbleSpecialThree(
                 text: message,
-                color: colorAssetData(context, ColorEnum.primaryColor),
+                color: colorAssetData(context, ColorEnum.friendMessageBubble),
                 tail: false,
                 isSender: false,
                 textStyle: TextStyle(

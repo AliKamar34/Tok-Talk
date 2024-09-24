@@ -4,4 +4,7 @@ enum ColorEnum{
   secondaryColor,
   textColor,
   iconColor,
+  userMessageBubble,
+  friendMessageBubble,
+
 }
