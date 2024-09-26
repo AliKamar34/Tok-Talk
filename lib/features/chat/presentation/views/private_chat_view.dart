@@ -10,9 +10,9 @@ class PrivateChatView extends StatelessWidget {
   final PersonModel personModel;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: BlocProvider(
+    return Scaffold(
+      body: SafeArea(
+        child: BlocProvider(
           create: (context) => PrivateChatCubit(ChatRepoImpl())
             ..getMessages(receverEmail: personModel.email),
           child: PrivateChatViewBody(

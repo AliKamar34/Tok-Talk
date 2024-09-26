@@ -7,7 +7,7 @@ class CreateGroupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body:CreateGroupViewBody() ,
+      body:SafeArea(child: CreateGroupViewBody()) ,
     );
   }
 }

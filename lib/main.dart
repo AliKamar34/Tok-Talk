@@ -7,7 +7,6 @@ import 'package:new_project/core/utils/contant.dart';
 import 'package:new_project/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:new_project/features/auth/presentation/manager/auth_bloc/auth_bloc.dart';
 import 'package:new_project/features/home/presentation/manager/chats_cubit/chats_cubit.dart';
-import 'package:new_project/features/home/presentation/manager/groups_cubit/groups_cubit.dart';
 import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 import 'package:new_project/features/settings/data/models/enums/theme_enums.dart';
 import 'package:new_project/features/settings/presentation/manager/theme_cubit/theme_cubit.dart';
@@ -43,11 +42,7 @@ class ChatGramApp extends StatelessWidget {
             
           )..getChats(),
         ),
-        BlocProvider(
-          create: (context) => GroupsCubit(
-            
-          )..getGroups(),
-        ),
+      
         BlocProvider(
           create: (context) => ThemeCubit()..changeTheme(ThemeEnum.initial),
         ),

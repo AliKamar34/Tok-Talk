@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:new_project/core/utils/colors_data.dart';
 import 'package:new_project/features/friends/presentation/views/friends_view.dart';
 import 'package:new_project/features/home/presentation/views/chats_view.dart';
-import 'package:new_project/features/home/presentation/views/groups_chats_view.dart';
 import 'package:new_project/features/settings/data/models/enums/colors_enums.dart';
 import 'package:new_project/features/settings/presentation/views/settings_view.dart';
 
@@ -21,35 +20,36 @@ class HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: Container(
-          margin: const EdgeInsets.all(12),
-          height: 65,
-          decoration: BoxDecoration(
-            color: colorAssetData(context, ColorEnum.primaryColor),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(.1),
-                blurRadius: 30,
-                offset: const Offset(0, 10),
-              ),
-            ],
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: ListView.builder(
-            itemCount: 4,
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            itemBuilder: (context, index) => InkWell(
-              onTap: () {
-                setState(() {
-                  currentIndex = index;
-                  HapticFeedback.lightImpact();
-                });
-              },
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
+    return Scaffold(
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.all(12),
+        height: 65,
+        decoration: BoxDecoration(
+          color: colorAssetData(context, ColorEnum.primaryColor),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(.1),
+              blurRadius: 30,
+              offset: const Offset(0, 10),
+            ),
+          ],
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: ListView.builder(
+          itemCount: 3,
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.only(left: 12, right: 30),
+          itemBuilder: (context, index) => InkWell(
+            onTap: () {
+              setState(() {
+                currentIndex = index;
+                HapticFeedback.lightImpact();
+              });
+            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            child: SizedBox(
+              width: displayWidth / 3.5,
               child: Stack(
                 children: [
                   AnimatedContainer(
@@ -75,57 +75,35 @@ class HomeViewState extends State<HomeView> {
                   AnimatedContainer(
                     duration: const Duration(seconds: 1),
                     curve: Curves.fastLinearToSlowEaseIn,
-                    width: index == currentIndex
-                        ? displayWidth * .31
-                        : displayWidth * .18,
                     alignment: Alignment.center,
-                    child: Stack(
+                    child: Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.center, // Keep center alignment
                       children: [
-                        Row(
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(seconds: 1),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              width: index == currentIndex
-                                  ? displayWidth * .13
-                                  : 0,
-                            ),
-                            AnimatedOpacity(
-                              opacity: index == currentIndex ? 1 : 0,
-                              duration: const Duration(seconds: 1),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              child: Text(
-                                index == currentIndex
-                                    ? listOfStrings[index]
-                                    : '',
-                                style: TextStyle(
-                                  color: colorAssetData(
-                                      context, ColorEnum.secondaryColor),
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                          ],
+                        Icon(
+                          listOfIcons[index],
+                          size: 32,
+                          color: index == currentIndex
+                              ? colorAssetData(
+                                  context, ColorEnum.secondaryColor)
+                              : Colors.white60,
                         ),
-                        Row(
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(seconds: 1),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              width: index == currentIndex
-                                  ? displayWidth * .03
-                                  : 20,
+                        // Space between icon and text
+                        if (index == currentIndex) const SizedBox(width: 8),
+                        // Display the text only when selected
+                        AnimatedOpacity(
+                          opacity: index == currentIndex ? 1 : 0,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          child: Text(
+                            index == currentIndex ? listOfStrings[index] : '',
+                            style: TextStyle(
+                              color: colorAssetData(
+                                  context, ColorEnum.secondaryColor),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15,
                             ),
-                            Icon(
-                              listOfIcons[index],
-                              size: 32,
-                              color: index == currentIndex
-                                  ? colorAssetData(
-                                      context, ColorEnum.secondaryColor)
-                                  : Colors.white60,
-                            ),
-                          ],
+                          ),
                         ),
                       ],
                     ),
@@ -135,27 +113,27 @@ class HomeViewState extends State<HomeView> {
             ),
           ),
         ),
-        body: pages[currentIndex],
       ),
+      body: SafeArea(child: pages[currentIndex]),
     );
   }
 
   List<IconData> listOfIcons = [
     FontAwesomeIcons.comments,
-    FontAwesomeIcons.userGroup,
+    // FontAwesomeIcons.userGroup,
     FontAwesomeIcons.addressBook,
     FontAwesomeIcons.gear
   ];
 
   List<String> listOfStrings = [
     'Chats',
-    'Groups',
+    // 'Groups',
     'Friends',
     'Settings',
   ];
   List<Widget> pages = [
     const ChatsView(),
-    const GroupsChatsView(),
+    // const GroupsChatsView(),
     const FriendsView(),
     const SettingsView(),
   ];

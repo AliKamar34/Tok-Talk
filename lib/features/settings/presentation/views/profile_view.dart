@@ -7,10 +7,8 @@ class ProfileView extends StatelessWidget {
   final PersonModel personModel;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: ProfileViewBody(personModel: personModel),
-      ),
+    return Scaffold(
+      body: SafeArea(child: ProfileViewBody(personModel: personModel)),
     );
   }
 }
