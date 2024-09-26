@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +35,7 @@ class ProfileImageSection extends StatelessWidget {
               icon: Icon(
                 FontAwesomeIcons.trash,
                 color: colorAssetData(context, ColorEnum.iconColor),
+                size: 20,
               ),
             ),
           ),

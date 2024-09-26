@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:new_project/core/models/person_model.dart';
 import 'package:new_project/features/auth/presentation/views/sign_in_view.dart';
 import 'package:new_project/features/auth/presentation/views/sign_up_view.dart';
+import 'package:new_project/features/chat/presentation/views/create_group_view.dart';
 import 'package:new_project/features/chat/presentation/views/private_chat_view.dart';
 import 'package:new_project/features/friends/data/repos/friends_repo_impl.dart';
 import 'package:new_project/features/friends/presentation/manager/requests_cubit/requests_cubit.dart';
@@ -27,7 +28,7 @@ abstract class AppRoutes {
   static const kRequestsView = '/RequestsView';
   static const kProfileView = '/profileView';
   static const kPrivateChateView = '/privateChatView';
-
+  static const kCreateGroupView = '/createGroupView';
   static const kBottomNavigationBarView = '/BottomNavigationBarView';
 
   static final GoRouter router = GoRouter(
@@ -56,7 +57,7 @@ abstract class AppRoutes {
           return const ChatsView();
         },
       ),
-        GoRoute(
+      GoRoute(
         path: kGroupsView,
         builder: (BuildContext context, GoRouterState state) {
           return const GroupsChatsView();
@@ -90,7 +91,7 @@ abstract class AppRoutes {
       GoRoute(
         path: kProfileView,
         builder: (BuildContext context, GoRouterState state) {
-          return  ProfileView(
+          return ProfileView(
             personModel: state.extra as PersonModel,
           );
         },
@@ -101,6 +102,12 @@ abstract class AppRoutes {
           return PrivateChatView(
             personModel: state.extra as PersonModel,
           );
+        },
+      ),
+        GoRoute(
+        path: kCreateGroupView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const CreateGroupView();
         },
       ),
     ],

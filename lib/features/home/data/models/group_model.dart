@@ -1,6 +1,21 @@
 import 'package:new_project/core/models/person_model.dart';
 import 'package:new_project/core/utils/chats_collection_data.dart';
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class GroupModel {
   final String name;
   final String image;
