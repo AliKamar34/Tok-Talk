@@ -51,7 +51,8 @@ lib/
 │ └── theme/ # Theme switching
 │   ├── data/
 │   └── presentation/
-├── app.dart # Main app config
+├── firebase_options.dart
+├── simple_bloc_opserver.dart # bloc orserver
 └── main.dart # App entry
 
 ```
