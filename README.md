@@ -1,16 +1,63 @@
-# new_project
+# 💬 Tok Talk
 
-A new Flutter project.
+**Tok Talk** is a modern chat application that enables real-time messaging, friend management, and personalized profiles with dark/light theme support.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Features
+- **Real-Time Chat**: Instant messaging with friends.
+- **Friend Management**: Add/remove friends and view their profiles.
+- **Theme Customization**: Switch between light/dark modes.
+- **Profile Customization**: Edit profile picture and name.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🛠 Technologies Used
+- **Flutter**: Cross-platform app development.
+- **State Management**: [Bloc](https://pub.dev/packages/flutter_bloc) for state management.
+- **Firebase**:
+  - **Firestore**: Real-time database for messages.
+  - **Authentication**: User sign-up/login.
+  - **Storage**: Store profile pictures, chat pictures, and records.
+- **UI**: Custom themes and animations.
+
+---
+
+## 📁 Folder Structure (MVVM Architecture)
+
+```
+
+lib/
+├── core/
+│ ├── utils/ 
+│ ├── services/ 
+│ ├── models/ 
+│ ├── widgets/ 
+│ └── error/ # Custom exceptions & error handling
+├── features/
+│ ├── chat/ # Chat functionality
+│ │   ├── data/ # Repositories, models
+│ │   └── presentation/
+│ │     ├── views/ # Chat UI components
+│ │     └── manager/ # Chat cubits
+│ ├── friends/ # Friend management
+│ │   ├── data/
+│ │   └── presentation/
+│ ├── profile/ # Profile customization
+│ │   ├── data/
+│ │   └── presentation/
+│ └── theme/ # Theme switching
+│   ├── data/
+│   └── presentation/
+├── app.dart # Main app config
+└── main.dart # App entry
+
+```
+
+## OS Support
+
+At present, we officially aim to support the last two versions of the following operating systems:
+
+[<img src="https://raw.githubusercontent.com/creativetimofficial/ct-material-kit-pro-react-native/master/assets/android-logo.png" width="60" height="60" />](https://www.creative-tim.com/product/now-ui-pro-react-native)[<img src="https://raw.githubusercontent.com/creativetimofficial/ct-material-kit-pro-react-native/master/assets/apple-logo.png" width="60" height="60" />](https://www.creative-tim.com/product/now-ui-pro-react-native)
